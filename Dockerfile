@@ -1,7 +1,7 @@
 FROM node:latest
 RUN mkdir /src
 WORKDIR /src
-ADD package.json /src/package.json
+COPY ./ ./
 RUN npm install
 EXPOSE 3000
-CMD npm run startdev
+CMD npm start
