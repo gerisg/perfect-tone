@@ -49,7 +49,7 @@ let kbs = [
     ]},
     {id:5, question:'Reflejos buscados', show: 'hidden', options: [
         {id:'21.A', text:'Azulado', tones:[1]},
-        {id:'21.B', text:'Naturales', tones:[1,3,4,5,6,7,8,9]},
+        {id:'21.B', text:'Naturales', tones:[1,2,3,4,5,6,7,8,9]},
         {id:'21.C', text:'Cenizas', tones:[6,7,8]},
         {id:'21.D', text:'Dorados y Beiges', tones:[6,7,8]},
         {id:'21.E', text:'Marrones y Chocolates', tones:[5,6]},
@@ -61,7 +61,7 @@ let kbs = [
 
 let reflex = [
     {id:'21.A', text:'Azulado', tones:[1], products:['1.A']},
-    {id:'21.B', text:'Naturales', tones:[1,3,4,5,6,7,8,9], products:['1','2','3','4','5','6','7','8','9']},
+    {id:'21.B', text:'Naturales', tones:[1,2,3,4,5,6,7,8,9], products:['1','2','3','4','5','6','7','8','9']},
     {id:'21.C', text:'Cenizas', tones:[6,7,8], products:['6.11', '7.11', '8.1']},
     {id:'21.D', text:'Dorados y Beiges', tones:[6,7,8], products:['6.13', '7.3', '8.13']},
     {id:'21.E', text:'Marrones y Chocolates', tones:[5,6], products:['5.7', '6.23', '6.73']},

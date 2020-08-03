@@ -6,8 +6,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Tu Tono Perfecto</h1>
-      <h2>Cuestionario</h2>
+      <h1>Cuestionario</h1>
       <form name="tone" action="/result" method="post">
 
         <div class="wrapper">
@@ -30,18 +29,15 @@
           <% }); %>
         </div>
 
-        <button type="reset" class="btn btn-secondary">Reiniciar</button>
-        <button type="submit" class="btn btn-primary">Recomendar</button>
+        <div class="fixed">
+          <button type="submit" class="btn btn-primary" disabled>Recomendar</button>
+          <a href="/" type="reset">Reiniciar</a>
+        </div>
 
       </form>
     </div>
     <script>
       (function() {
-        // Refresh
-        document.forms['tone'].addEventListener('reset', function () {
-          document.location.reload(true);
-        });
-
         // Answer q1 enable q2 (conditional) or q3 
         var q1 = document.forms['tone'].elements['q1'];
         var prev = null;
@@ -88,9 +84,9 @@
             }
             
             request.onload = function () {
-              // Begin accessing JSON data here
-              var data = JSON.parse(this.response);
               if (request.status >= 200 && request.status < 400) {
+                // Begin accessing JSON data here
+                var data = JSON.parse(this.response);
                 // Find options for Q5
                 var q5Options = null;
                 var q5Children = document.getElementById('question-5').childNodes;
@@ -100,10 +96,9 @@
                       break;
                     }        
                 }
-                
+
                 // Clean
                 q5Options.innerHTML = "";
-                
                 var inputs = document.forms['tone'].getElementsByTagName('input');
                 for(var i = 0; i < inputs.length; i++) {
                     if(inputs[i].type.toLowerCase() == 'hidden') {
@@ -128,6 +123,14 @@
                   input.id = option.id;
                   input.name = 'q5';
                   input.value = option.id;
+                  input.addEventListener('change', function() {
+                    var buttons = document.forms['tone'].getElementsByTagName('button');
+                    for(var i = 0; i < buttons.length; i++) {
+                        if(buttons[i].type.toLowerCase() == 'submit') {
+                            buttons[i].disabled = false;
+                        }
+                    }
+                  });
                   optionDiv.appendChild(input);
 
                   const label = document.createElement('label');
@@ -139,13 +142,17 @@
                 })
                 // Show
                 document.getElementById('question-5').classList.remove('hidden');
+              } else {
+                alert('Diferencia mayor a 2 no esta implementado');
               }
             }
 
             // Send request
             request.send()
+
           });
         }
+
       }());
     </script>
   </body>
