@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CoBeauty</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Tu Tono Perfecto</h1>
+      <h2>Cuestionario</h2>
+      <form name="tone" action="/result" method="post">
+
+        <div class="wrapper">
+          <% kbs.forEach(kb => { %>
+          
+          <div id="question-<%= kb.id %>" class="question <%= kb.show %>">  
+            <p class="title"><%= kb.question %></p>
+            <div class="options">
+              <% kb.options.forEach(option => { %>
+              
+                <div class="option">
+                <input type="radio" id="<%= option.id %>" name="q<%= kb.id %>" value="<%= option.id %>">
+                <label for="<%= option.id %>" class="<%= option.category %>"><%= option.text %> <%= option.tone %></label>
+              </div>
+
+              <% }); %>
+            </div>
+          </div>
+
+          <% }); %>
+        </div>
+
+        <button type="reset" class="btn btn-secondary">Reiniciar</button>
+        <button type="submit" class="btn btn-primary">Recomendar</button>
+
+      </form>
+    </div>
+    <script>
+      (function() {
+        // Refresh
+        document.forms['tone'].addEventListener('reset', function () {
+          document.location.reload(true);
+        });
+
+        // Answer q1 enable q2 (conditional) or q3 
+        var q1 = document.forms['tone'].elements['q1'];
+        var prev = null;
+        for (var i=0, len=q1.length; i<len; i++) {
+          q1[i].addEventListener('change', function() {
+            if (this.value === '10.A') {
+              document.getElementById('question-3').classList.add('hidden');
+              document.getElementById('question-2').classList.remove('hidden');
+            } else if(this.value === '10.B') {
+              document.getElementById('question-2').classList.add('hidden');
+              document.getElementById('question-3').classList.remove('hidden');
+            }
+          });
+        }
+
+        // Answer q2 enable q3 
+        var q2 = document.forms['tone'].elements['q2'];
+        for (var i=0, len=q2.length; i<len; i++) {
+          q2[i].addEventListener('change', function() {
+            document.getElementById('question-3').classList.remove('hidden');
+          });
+        }
+
+        // Answer q3 enable q4 
+        var q3 = document.forms['tone'].elements['q3'];
+        for (var i=0, len=q3.length; i<len; i++) {
+          q3[i].addEventListener('change', function() {
+            document.getElementById('question-4').classList.remove('hidden');
+          });
+        }
+
+        // Answer q4 calculate available options and enable q5
+        var q4 = document.forms['tone'].elements['q4'];
+        for (var i=0, len=q4.length; i<len; i++) {
+          q4[i].addEventListener('change', function() {
+            // Create a request variable and assign a new XMLHttpRequest object to it.
+            var request = new XMLHttpRequest()
+
+            // Open a new connection, using the GET request on the URL endpoint
+            if (q2.value) {
+              request.open('GET', `http://localhost:3000/options/${q1.value}/${q2.value}/${q3.value}/${this.value}`, true)
+            } else {
+              request.open('GET', `http://localhost:3000/options/${q1.value}/${q3.value}/${this.value}`, true)
+            }
+            
+            request.onload = function () {
+              // Begin accessing JSON data here
+              var data = JSON.parse(this.response);
+              if (request.status >= 200 && request.status < 400) {
+                // Find options for Q5
+                var q5Options = null;
+                var q5Children = document.getElementById('question-5').childNodes;
+                for (var i = 0; i < q5Children.length; i++) {
+                    if (q5Children[i].className == 'options') {
+                      q5Options = q5Children[i];
+                      break;
+                    }        
+                }
+                
+                // Clean
+                q5Options.innerHTML = "";
+                
+                var inputs = document.forms['tone'].getElementsByTagName('input');
+                for(var i = 0; i < inputs.length; i++) {
+                    if(inputs[i].type.toLowerCase() == 'hidden') {
+                        inputs[i].remove();
+                    }
+                }
+                
+                // Save tone suggested
+                const inputHidden = document.createElement('input');
+                inputHidden.type = 'hidden';
+                inputHidden.name = 'tones';
+                inputHidden.value = data.tones;
+                document.forms['tone'].appendChild(inputHidden);
+
+                // Create option
+                data.reflexes.forEach((option) => {
+                  const optionDiv = document.createElement('div')
+                  optionDiv.setAttribute('class', 'option')
+
+                  const input = document.createElement('input');
+                  input.type = 'radio';
+                  input.id = option.id;
+                  input.name = 'q5';
+                  input.value = option.id;
+                  optionDiv.appendChild(input);
+
+                  const label = document.createElement('label');
+                  label.htmlFor = option.id;
+                  label.innerHTML = option.text;
+                  optionDiv.appendChild(label);
+
+                  q5Options.appendChild(optionDiv);
+                })
+                // Show
+                document.getElementById('question-5').classList.remove('hidden');
+              }
+            }
+
+            // Send request
+            request.send()
+          });
+        }
+      }());
+    </script>
+  </body>
+</html>

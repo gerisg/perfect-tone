@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CoBeauty - Result</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Tu Tono Perfecto</h1>
+      <h2>Basado en su selección:</h2>
+      <ul>
+        <li>Teñido: <%= q1 %></li>
+        <li>Tono en medios: <%= q2 %></li>
+        <li>Tono en raíces: <%= q3 %></li>
+        <li>Resultado deseado: <%= q4 %></li>
+        <li>Reflejos esperados: <%= q5 %></li>
+      </ul>
+      <h2>CoBeauty sugiere:</h2>
+      <% products.forEach(product => { %>
+        <p class="product"><%= product %> </p>
+      <% }) %>
+
+      <div class="link">
+        <a href="/" >Volver</a>
+      </div>
+    </div>
+  </body>
+</html>
