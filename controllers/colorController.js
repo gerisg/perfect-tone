@@ -52,13 +52,14 @@ let reflex = [
     {id:'21.H', text:'Rojos', tones:[6,7]}
 ];
 
-function calculateTone(desired, rootTone) {
+function calculateTone(colored, desired, rootTone) {
     let suggestedtones = [];
     if (desired.tone == '*') {
         // Si no sabe le voy a mostrar un tono más, un tono igual y un tono menos 
-        suggestedtones.push(rootTone.tone - 1, rootTone.tone, rootTone.tone + 1);
-    }
-    else {
+        suggestedtones.push(rootTone.tone -1); // tono más oscuro
+        suggestedtones.push(rootTone.tone); // mismo tono
+        if(!colored) { suggestedtones.push(rootTone.tone +1); } // tono más claro
+    } else {
         // Si sabe, le suma o resta un tono, o lo deja igual
         suggestedtones.push(rootTone.tone + desired.tone);
     }
@@ -81,9 +82,9 @@ function calculateColored (mediumToneSelected, rootToneSelected, desiredToneSele
 
     let diff = mediumTone.tone - rootTone.tone;
     if(diff == 0) {
-        return calculateTone(desired, rootTone);
+        return calculateTone(true, desired, rootTone);
     } else if (Math.abs(diff) <= 2) {
-        return calculateTone(desired, mediumTone);
+        return calculateTone(true, desired, mediumTone);
     }
 
     throw new Error("This feature has not been implemented yet.");
@@ -96,7 +97,7 @@ function calculateNatural (rootToneSelected, desiredToneSelected) {
     let desired = desiredTones.find(desired => desired.id == desiredToneSelected);
     console.log('Desired Tone: ' + desired.tone);
 
-    return calculateTone(rootTone, desired);
+    return calculateTone(false, rootTone, desired);
 }
 
 module.exports = {
