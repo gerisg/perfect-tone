@@ -3,4 +3,4 @@ perfect-tone:
      volumes:
          - "./:/src/"
      ports:
-         - "3000:3000"
+         - "3030:3000"
