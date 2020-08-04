@@ -1,7 +1,7 @@
 (function() {
+
 // Answer q1 enable q2 (conditional) or q3 
 var q1 = document.forms['tone'].elements['q1'];
-var prev = null;
 for (var i=0, len=q1.length; i<len; i++) {
     q1[i].addEventListener('change', function() {
         if (this.value === '10.A') {
@@ -89,12 +89,12 @@ for (var i=0, len=q4.length; i<len; i++) {
             input.name = 'q5';
             input.value = option.id;
             input.addEventListener('change', function() {
-            var buttons = document.forms['tone'].getElementsByTagName('button');
-            for(var i = 0; i < buttons.length; i++) {
-                if(buttons[i].type.toLowerCase() == 'submit') {
-                    buttons[i].disabled = false;
+                var buttons = document.forms['tone'].getElementsByTagName('button');
+                for(var i = 0; i < buttons.length; i++) {
+                    if(buttons[i].type.toLowerCase() == 'submit') {
+                        buttons[i].disabled = false;
+                    }
                 }
-            }
             });
             optionDiv.appendChild(input);
 

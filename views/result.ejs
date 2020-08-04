@@ -37,7 +37,7 @@
         </div>
         <h2>¿Estás de acuerdo con el producto sugerido?</h2>
         <div class="feedback">
-          <form action="/feedback/save" method="POST">
+          <form name="feedback" action="/feedback/save" method="POST">
             <div class="agree">
               <input type="radio" id="yes" name="agree" value="yes">
               <label for="yes">Si</label>
@@ -55,12 +55,28 @@
               <input type="hidden" name="q5" value="<%= q5 %>">
             </div>
             <div class="actions">
-              <button type="submit" class="btn btn-primary">Enviar</button>
+              <button type="submit" class="btn btn-primary" disabled>Enviar</button>
               <a href="/" type="reset">Reiniciar</a>
             </div>
           </form>
         </div>
       </main>
     </div>
+    <script>
+      (function() {
+        var form = document.forms['feedback'];
+        var agree = form.elements['agree'];
+        for (var i=0, len=agree.length; i<len; i++) {
+          agree[i].addEventListener('change', function() {
+            var buttons = form.getElementsByTagName('button');
+            for (var b=0, len=buttons.length; b<len; b++) {
+              if(buttons[b].type.toLowerCase() == 'submit') {
+                buttons[b].disabled = false;
+              }
+            }
+          });
+        }
+      }());
+    </script>
   </body>
 </html>
