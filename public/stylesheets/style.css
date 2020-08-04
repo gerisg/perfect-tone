@@ -1,16 +1,63 @@
-body {
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Generals */
+* {
+  box-sizing: border-box;
 }
+body {
+  font-family: Helvetica, sans-serif;
+  color: #333;
+  background-color: white;
 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  margin: 0 auto;
+  padding: 0;
+}
 .container {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 }
 
-.hidden {
-  display: none;
+/* text */
+h1 {
+  font-size: 2rem;
+}
+.title {
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+}
+a {
+  color: #00B7FF;
 }
 
+/* buttons */
+.btn {
+  border: 1px solid transparent;
+  margin: 0 1rem 0 0;
+  font-size: .75rem;
+  line-height: 1.5rem;
+  border-radius: .25rem;
+}
+.btn-primary:disabled {
+  color: #fff;
+  background-color: #6eaaeb;
+  border-color: #4686ca;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+/* colors */
+.negros { color: black; }
+.marrones { color: brown; }
+.rubios { color: #b9b39c; }
+.rojos { color: red; }
+
+/* form questions */
 .wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -22,65 +69,37 @@ body {
   .wrapper .options {
     display: flex;
     flex-wrap: wrap;
-    font-size: .75rem;
   }
   .wrapper .option {
-    width: 25%;
+    margin: 0 .25rem;
+    width: 45%;
+    font-size: .75rem;
   }
 
-.title {
-  color: #333;
-  font-size: 1rem;
+/* form actions */
+.actions {
+  margin: 1rem 0;
+}
+  .actions a {
+    font-size: .75rem;
+    text-decoration: none;
+  }
+.hidden {
+  display: none;
 }
 
-a {
-  color: #00B7FF;
+/* form results */
+.link {
+  margin-top: 1rem 0;
 }
-
-.negros { color: black; }
-.marrones { color: brown; }
-.rubios { color: #b9b39c; }
-.rojos { color: red; }
-
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: .25rem .5rem;
-  margin: 0 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem
-}
-
-.btn-primary:disabled {
-  color: #fff;
-  background-color: #6eaaeb;
-  border-color: #4686ca;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-
 .product {
-  font-family: sans-serif;
   font-size: 1.5rem;
   font-weight: bolder;
   margin: .5rem 1.5rem;
 }
 
-.link {
-  margin-top: 2rem;
-}
-
-.fixed {
-  position: fixed;
-  bottom: 1rem;
+@media (min-width: 768px) {
+  .wrapper .option {
+    width: 23%;
+  }
 }

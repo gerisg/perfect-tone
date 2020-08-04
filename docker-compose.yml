@@ -1,6 +1,0 @@
-perfect-tone:
-     build: .
-     volumes:
-         - "./:/src/"
-     ports:
-         - "3030:3000"

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoBeauty</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
@@ -29,7 +31,7 @@
           <% }); %>
         </div>
 
-        <div class="fixed">
+        <div class="actions">
           <button type="submit" class="btn btn-primary" disabled>Recomendar</button>
           <a href="/" type="reset">Reiniciar</a>
         </div>
@@ -78,9 +80,9 @@
 
             // Open a new connection, using the GET request on the URL endpoint
             if (q2.value) {
-              request.open('GET', `http://localhost:3000/options/${q1.value}/${q2.value}/${q3.value}/${this.value}`, true)
+              request.open('GET', `https://quiz.cobeauty.store/options/${q1.value}/${q2.value}/${q3.value}/${this.value}`, true)
             } else {
-              request.open('GET', `http://localhost:3000/options/${q1.value}/${q3.value}/${this.value}`, true)
+              request.open('GET', `https://quiz.cobeauty.store/options/${q1.value}/${q3.value}/${this.value}`, true)
             }
             
             request.onload = function () {
