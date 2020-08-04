@@ -23,6 +23,9 @@ body {
 h1 {
   font-size: 2rem;
 }
+h2 {
+  font-size: 1rem;
+}
 .title {
   color: #333;
   font-size: 1rem;
@@ -76,6 +79,22 @@ a {
     font-size: .75rem;
   }
 
+/* form results */
+.results ul {
+  margin-left: 1rem;
+  padding-left: .5rem;
+  font-size: .8rem;
+}
+  .results ul>li .selection {
+    font-style: italic;
+    text-transform: uppercase;
+  }
+.results .product {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin: .5rem 1.5rem;
+}
+
 /* form actions */
 .actions {
   margin: 1rem 0;
@@ -88,18 +107,11 @@ a {
   display: none;
 }
 
-/* form results */
-.link {
-  margin-top: 1rem 0;
-}
-.product {
-  font-size: 1.5rem;
-  font-weight: bolder;
-  margin: .5rem 1.5rem;
-}
-
 @media (min-width: 768px) {
   .wrapper .option {
     width: 23%;
+  }
+  .results ul {
+    font-size: 1rem;
   }
 }

@@ -8,23 +8,31 @@
   </head>
   <body>
     <div class="container">
-      <h1>Tu Tono Perfecto</h1>
-      <h2>Basado en su selección:</h2>
-      <ul>
-        <li>Teñido: <%= q1 %></li>
-        <li>Tono en medios: <%= q2 %></li>
-        <li>Tono en raíces: <%= q3 %></li>
-        <li>Resultado deseado: <%= q4 %></li>
-        <li>Reflejos esperados: <%= q5 %></li>
-      </ul>
-      <h2>CoBeauty sugiere:</h2>
-      <% products.forEach(product => { %>
-        <p class="product"><%= product %> </p>
-      <% }) %>
-
-      <div class="link">
-        <a href="/" >Volver</a>
-      </div>
+      <main class="results">
+        <h1>Tu Tono Perfecto</h1>
+        <h2>Basado en su selección:</h2>
+        <ul>
+          <li><b>Teñido: </b><span class="selection"><%= q1 %></span></li>
+          <li><b>Tono en medios: </b><span class="selection"><%= q2 %></span></li>
+          <li><b>Tono en raíces: </b><span class="selection"><%= q3 %></span></li>
+          <li><b>Resultado deseado: </b><span class="selection"><%= q4 %></span></li>
+          <li><b>Reflejos esperados: </b><span class="selection"><%= q5 %></span></li>
+        </ul>
+        <h2>CoBeauty sugiere:</h2>
+        <div class="products">
+          <ul>
+            <% for( let index = 0; index < products.length; index++ ) { %>
+              <li>
+                <b>Opción <%= index+1 %>: </b>
+                <span class="product"><%= products[index] %></span>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="actions">
+          <a href="/" type="reset">Reiniciar</a>
+        </div>
+      </main>
     </div>
   </body>
 </html>
