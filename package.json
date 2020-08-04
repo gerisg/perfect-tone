@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node app.js",
-    "startdev": "nodemon app.js"
+    "startdev": "nodemon --ignore 'data/*' app.js "
   },
   "dependencies": {
     "ejs": "~2.6.1",

@@ -131,11 +131,25 @@ a {
   text-decoration: line-through;
 }
 
+/* feedback */
+.feedback .agree {
+  padding-bottom: .5rem;
+}
+  .feedback .agree label {
+    margin-right: 1rem;
+  }
+.feedback .comment textarea {
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .wrapper .option {
     width: 23%;
   }
   .results ul {
     font-size: 1rem;
+  }
+  .feedback .comment textarea {
+    width: 50%;
   }
 }
