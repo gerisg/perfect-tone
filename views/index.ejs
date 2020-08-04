@@ -8,35 +8,43 @@
   </head>
   <body>
     <div class="container">
-      <h1>Cuestionario</h1>
-      <form name="tone" action="/result" method="post">
-
-        <div class="wrapper">
-          <% kbs.forEach(kb => { %>
-          
-          <div id="question-<%= kb.id %>" class="question <%= kb.show %>">  
-            <p class="title"><%= kb.question %></p>
-            <div class="options">
-              <% kb.options.forEach(option => { %>
-              
-                <div class="option">
-                <input type="radio" id="<%= option.id %>" name="q<%= kb.id %>" value="<%= option.id %>">
-                <label for="<%= option.id %>" class="<%= option.category %>"><%= option.text %> <%= option.tone %></label>
+      <nav>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/rules">Reglas</a></li>
+        </ul>
+      </nav>
+      <main>
+        <h1>Cuestionario</h1>
+        <form name="tone" action="/result" method="post">
+  
+          <div class="wrapper">
+            <% kbs.forEach(kb => { %>
+            
+            <div id="question-<%= kb.id %>" class="question <%= kb.show %>">  
+              <p class="title"><%= kb.question %></p>
+              <div class="options">
+                <% kb.options.forEach(option => { %>
+                
+                  <div class="option">
+                  <input type="radio" id="<%= option.id %>" name="q<%= kb.id %>" value="<%= option.id %>">
+                  <label for="<%= option.id %>" class="<%= option.category %>"><%= option.text %> <%= option.tone %></label>
+                </div>
+  
+                <% }); %>
               </div>
-
-              <% }); %>
             </div>
+  
+            <% }); %>
           </div>
-
-          <% }); %>
-        </div>
-
-        <div class="actions">
-          <button type="submit" class="btn btn-primary" disabled>Recomendar</button>
-          <a href="/" type="reset">Reiniciar</a>
-        </div>
-
-      </form>
+  
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" disabled>Recomendar</button>
+            <a href="/" type="reset">Reiniciar</a>
+          </div>
+  
+        </form>
+      </main>
     </div>
     <script src="/javascripts/main.js"></script>
   </body>

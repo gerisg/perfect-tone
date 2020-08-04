@@ -4,6 +4,7 @@ var path = require('path');
 var indexRouter = require('./routes/index');
 var colorRouter = require('./routes/color');
 var resultRouter = require('./routes/result');
+var rulesRouter = require('./routes/rules');
 
 var app = express();
 
@@ -17,5 +18,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/options', colorRouter);
 app.use('/result', resultRouter);
+app.use('/rules', rulesRouter);
 
 app.listen(3000, () => console.log('Server started'));

@@ -19,6 +19,25 @@ body {
   margin: 0 auto;
 }
 
+/* nav bar */
+nav>ul {
+  font-size: .75rem;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+  nav>ul>li {
+    padding: 0 .25rem;
+  }
+  nav>ul>li a {
+    text-decoration: none;
+  }
+  nav>ul>li:last-child a::before {
+    content: " | ";
+    font-weight: bold;
+  }
+
 /* text */
 h1 {
   font-size: 2rem;

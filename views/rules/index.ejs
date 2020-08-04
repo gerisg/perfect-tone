@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoBeauty</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container">
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/rules">Reglas</a></li>
+          </ul>
+    </nav>
+    <main>
+        <h1>Reglas</h1>
+        <h2>Cabellos teñidos</h2>
+        <ul>
+            <li>
+                <p>Diferencia entre tono de los cabellos medios y tono de las raíces</p>
+                <ul>
+                    <li><b>Son iguales: </b> se calcula el tono sugerido en base a las raíces</li>
+                    <li><b>Diferencia igual a 1 o 2: </b> se calcula el tono sugerido en base a los medios</li>
+                    <li><b>Diferencia mayor a 2: </b> [TODO]</li>
+                </ul>
+            </li>
+            <li>
+                <p>Cálculo del tono sugerido. Si el usuario desea:</p>
+                <ul>
+                    <li><b>Tono más claro: </b> se suma 1 al tono de los medios</li>
+                    <li><b>Mismo tono: </b> se sugiere el tono de los medios</li>
+                    <li><b>Tono más oscuro: </b> se resta 1 al tono de los medios</li>
+                    <li><b>No sabe: </b> se sugiere el tono actual, 1 tono más y un 1 tono menos</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>Cabellos naturales</h2>
+        <ul>
+            <li>
+                <p>Siempre se utiliza el tono de las raíces para el cálculo del tono sugerido. Si el usuario desea:</p>
+                <ul>
+                    <li><b>Tono más claro: </b> se suma 1 al tono de las raíces</li>
+                    <li><b>Mismo tono: </b> se sugiere el tono actual de las raíces</li>
+                    <li><b>Tono más oscuro: </b> se resta 1 al tono de las raíces</li>
+                    <li><b>No sabe: </b> se sugiere el tono actual, 1 tono más y un 1 tono menos respecto al tono de las raíces</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>Qué hacemos con el/los tono/s sugerido/s</h2>
+        <p>Dado que cada reflejo tiene asociada una lista de tonos en los cuáles existen productos, la determinación de los tonos sugeridos nos ayuda a filtrar los reflejos disponibles, para que el usuario pueda seleccionar sólo aquellos que lo llevarán a un producto.</p>
+    </main>
+</body>
+</html>
