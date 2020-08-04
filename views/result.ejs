@@ -35,8 +35,26 @@
             <% } %>
           </ul>
         </div>
-        <div class="actions">
-          <a href="/" type="reset">Reiniciar</a>
+        <h2>¿Estás de acuerdo con el producto sugerido?</h2>
+        <div class="feedback">
+          <form action="/feedback/save" method="POST">
+            <div>
+              <input type="radio" id="yes" name="agree" value="yes">
+              <label for="yes">Si</label>
+              <input type="radio" id="no" name="agree" value="no">
+              <label for="no">No</label>
+            </div>
+            <textarea name="comment" id="comment" cols="80" rows="10"></textarea>
+            <input type="hidden" name="q1" value="<%= q1 %>">
+            <input type="hidden" name="q2" value="<%= q2 %>">
+            <input type="hidden" name="q3" value="<%= q3 %>">
+            <input type="hidden" name="q4" value="<%= q4 %>">
+            <input type="hidden" name="q5" value="<%= q5 %>">
+            <div class="actions">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+              <a href="/" type="reset">Reiniciar</a>
+            </div>
+          </form>
         </div>
       </main>
     </div>
