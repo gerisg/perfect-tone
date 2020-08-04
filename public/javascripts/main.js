@@ -4,13 +4,13 @@ var q1 = document.forms['tone'].elements['q1'];
 var prev = null;
 for (var i=0, len=q1.length; i<len; i++) {
     q1[i].addEventListener('change', function() {
-    if (this.value === '10.A') {
-        document.getElementById('question-3').classList.add('hidden');
-        document.getElementById('question-2').classList.remove('hidden');
-    } else if(this.value === '10.B') {
-        document.getElementById('question-2').classList.add('hidden');
-        document.getElementById('question-3').classList.remove('hidden');
-    }
+        if (this.value === '10.A') {
+            document.getElementById('question-3').classList.add('hidden');
+            document.getElementById('question-2').classList.remove('hidden');
+        } else if(this.value === '10.B') {
+            document.getElementById('question-2').classList.add('hidden');
+            document.getElementById('question-3').classList.remove('hidden');
+        }
     });
 }
 
@@ -18,7 +18,7 @@ for (var i=0, len=q1.length; i<len; i++) {
 var q2 = document.forms['tone'].elements['q2'];
 for (var i=0, len=q2.length; i<len; i++) {
     q2[i].addEventListener('change', function() {
-    document.getElementById('question-3').classList.remove('hidden');
+        document.getElementById('question-3').classList.remove('hidden');
     });
 }
 
@@ -26,7 +26,11 @@ for (var i=0, len=q2.length; i<len; i++) {
 var q3 = document.forms['tone'].elements['q3'];
 for (var i=0, len=q3.length; i<len; i++) {
     q3[i].addEventListener('change', function() {
-    document.getElementById('question-4').classList.remove('hidden');
+        document.getElementById('question-4').classList.remove('hidden');
+        // Colored hair cann't be clarified
+        if (q1.value === '10.A') {
+            document.querySelector('#question-4 .options .option input').disabled = true;
+        }
     });
 }
 
