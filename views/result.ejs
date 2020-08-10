@@ -27,7 +27,7 @@
         <h2>CoBeauty sugiere:</h2>
         <div class="products">
           <ul>
-            <% for( let index = 0; index < products.length; index++ ) { %>
+            <% for(let index=0; index<products.length; index++ ) { %>
               <li>
                 <b>Opción <%= index+1 %>: </b>
                 <span class="product"><%= products[index] %></span>
@@ -53,6 +53,7 @@
               <input type="hidden" name="q3" value="<%= q3 %>">
               <input type="hidden" name="q4" value="<%= q4 %>">
               <input type="hidden" name="q5" value="<%= q5 %>">
+              <input type="hidden" name="products" value="<%= products %>">
             </div>
             <div class="actions">
               <button type="submit" class="btn btn-primary" disabled>Enviar</button>
