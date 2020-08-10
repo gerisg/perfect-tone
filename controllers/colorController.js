@@ -83,11 +83,9 @@ function calculateColored (mediumToneSelected, rootToneSelected, desiredToneSele
     let diff = mediumTone.tone - rootTone.tone;
     if(diff == 0) {
         return calculateTone(true, desired, rootTone);
-    } else if (Math.abs(diff) <= 2) {
-        return calculateTone(true, desired, mediumTone);
     }
-
-    throw new Error("This feature has not been implemented yet.");
+    
+    return calculateTone(true, desired, mediumTone);
 }
 
 function calculateNatural (rootToneSelected, desiredToneSelected) {
