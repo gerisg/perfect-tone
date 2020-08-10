@@ -97,7 +97,7 @@ function calculateNatural (rootToneSelected, desiredToneSelected) {
     let desired = desiredTones.find(desired => desired.id == desiredToneSelected);
     console.log('Desired Tone: ' + desired.tone);
 
-    return calculateTone(false, rootTone, desired);
+    return calculateTone(false, desired, rootTone);
 }
 
 module.exports = {
