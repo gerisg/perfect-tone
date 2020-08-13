@@ -2,12 +2,12 @@ let onlyRedProducts = ['8.1'];
 
 let yesnoOptions = [
     {id:'10.A', text:'si'},
-    {id:'10.B', text:'no'}
+    {id:'10.B', text:'no'},
 ];
 
 let mediumTones = [
     {id:'14.A.1', text:'Negro amarronado', tone:3, category:'negros'},
-    {id:'14.A.2', text:'Negro', tone:2, category:'negros'},
+    {id:'14.A.2', text:'Negro', tone:1, category:'negros'},
     {id:'14.B.1', text:'Marrón cobrizo muy claro', tone:8, category:'marrones'},
     {id:'14.B.2', text:'Marrón claro', tone:7, category:'marrones'},
     {id:'14.B.3', text:'Marrón medio', tone:6, category:'marrones'},
@@ -26,7 +26,7 @@ let mediumTones = [
 
 let rootTones = [
     {id:'15.A.1', text:'Negro amarronado', tone:3, category:'negros'},
-    {id:'15.A.2', text:'Negro', tone:2, category:'negros'},
+    {id:'15.A.2', text:'Negro', tone:1, category:'negros'},
     {id:'15.B.1', text:'Marrón claro', tone:7, category:'marrones'},
     {id:'15.B.2', text:'Marrón medio', tone:6, category:'marrones'},
     {id:'15.B.3', text:'Marrón oscuro', tone:5, category:'marrones'},
@@ -45,7 +45,7 @@ let desiredTones = [
     {id:'19.A', text:'Más claro', value:'light'},
     {id:'19.B', text:'Igual', value:'equal'},
     {id:'19.C', text:'Más oscuro', value:'dark'},
-    {id:'19.D', text:'No lo sé', value:'unknown'}
+    {id:'19.D', text:'No lo sé', value:'unknown'},
 ];
 
 let reflex = [
@@ -56,8 +56,8 @@ let reflex = [
     {id:'21.E', text:'Marrones y Chocolates', tones:[5,6], products:['5.7', '6.23', '6.73']},
     {id:'21.F', text:'Caobas', tones:[5], products:['5.5']},
     {id:'21.G', text:'Violetas', tones:[5], products:['5.20']},
-    {id:'21.H', text:'Rojos', tones:[6,7], products:['6.66', '7.60']},
-    {id:'21.I', text:'Marrones y Chocolates', tones:[4,5,6,7], products:['4', '5', '6.11', '7.11'], onlyRed: true},
+    {id:'21.H', text:'Rojos', tones:[6,7], products:['6.66', '7.60'], redBased: true},
+    {id:'21.I', text:'Marrones y Chocolates', tones:[4,5,6,7], products:['4', '5', '6.11', '7.11'], redBased: true},
 ];
 
 let kbs = [
@@ -65,7 +65,7 @@ let kbs = [
     {id:2, question:'Tono en los medios', show: 'hidden', options: mediumTones},
     {id:3, question:'Tono en las raíces', show: 'hidden', options: rootTones},
     {id:4, question:'Resultado deseado', show: 'hidden', options: desiredTones},
-    {id:5, question:'Reflejos buscados', show: 'hidden', options: []}
+    {id:5, question:'Reflejos buscados', show: 'hidden', options: []},
 ];
 
 module.exports = { kbs, mediumTones, rootTones, desiredTones, reflex, onlyRedProducts };

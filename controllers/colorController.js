@@ -30,11 +30,18 @@ function calculateTone(desired, rootTone, colored) {
     console.log("suggested: " + suggestedtones);
 
     let filteredReflex = data.reflex.filter( // Filtro los reflejos que tienen al menos uno de los tonos sugeridos
-        r => suggestedtones.map(
-            suggestion => r.tones.includes(suggestion)).reduce( 
+        reflex => suggestedtones.map(
+            suggestion => reflex.tones.includes(suggestion)).reduce( 
                 // Puede devolver múltiples true/false entonces los reduzco
                 (result, current) => result || current)); 
+    
+    // Filtrar sólo reflejos para rojos
+    if (rootTone.category == 'rojos') {
+        filteredReflex = filteredReflex.filter(reflex => reflex.redBased );
+    }
+
     console.log("Filtered: " + JSON.stringify(filteredReflex));
+
     return { tones: suggestedtones, reflexes: filteredReflex };
 }
 
