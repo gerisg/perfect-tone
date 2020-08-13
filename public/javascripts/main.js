@@ -50,65 +50,63 @@ for (var i=0, len=q4.length; i<len; i++) {
     
     request.onload = function () {
         if (request.status >= 200 && request.status < 400) {
-        // Begin accessing JSON data here
-        var data = JSON.parse(this.response);
-        // Find options for Q5
-        var q5Options = null;
-        var q5Children = document.getElementById('question-5').childNodes;
-        for (var i = 0; i < q5Children.length; i++) {
-            if (q5Children[i].className == 'options') {
-                q5Options = q5Children[i];
-                break;
-            }        
-        }
-
-        // Clean
-        q5Options.innerHTML = "";
-        var inputs = document.forms['tone'].getElementsByTagName('input');
-        for(var i = 0; i < inputs.length; i++) {
-            if(inputs[i].type.toLowerCase() == 'hidden') {
-                inputs[i].remove();
+            // Begin accessing JSON data here
+            var data = JSON.parse(this.response);
+            // Find options for Q5
+            var q5Options = null;
+            var q5Children = document.getElementById('question-5').childNodes;
+            for (var i = 0; i < q5Children.length; i++) {
+                if (q5Children[i].className == 'options') {
+                    q5Options = q5Children[i];
+                    break;
+                }        
             }
-        }
-        
-        // Save tone suggested
-        const inputHidden = document.createElement('input');
-        inputHidden.type = 'hidden';
-        inputHidden.name = 'tones';
-        inputHidden.value = data.tones;
-        document.forms['tone'].appendChild(inputHidden);
 
-        // Create option
-        data.reflexes.forEach((option) => {
-            const optionDiv = document.createElement('div')
-            optionDiv.setAttribute('class', 'option')
-
-            const input = document.createElement('input');
-            input.type = 'radio';
-            input.id = option.id;
-            input.name = 'q5';
-            input.value = option.id;
-            input.addEventListener('change', function() {
-                var buttons = document.forms['tone'].getElementsByTagName('button');
-                for(var i = 0; i < buttons.length; i++) {
-                    if(buttons[i].type.toLowerCase() == 'submit') {
-                        buttons[i].disabled = false;
-                    }
+            // Clean
+            q5Options.innerHTML = "";
+            var inputs = document.forms['tone'].getElementsByTagName('input');
+            for(var i = 0; i < inputs.length; i++) {
+                if(inputs[i].type.toLowerCase() == 'hidden') {
+                    inputs[i].remove();
                 }
-            });
-            optionDiv.appendChild(input);
+            }
+            
+            // Save tone suggested
+            const inputHidden = document.createElement('input');
+            inputHidden.type = 'hidden';
+            inputHidden.name = 'tones';
+            inputHidden.value = data.tones;
+            document.forms['tone'].appendChild(inputHidden);
 
-            const label = document.createElement('label');
-            label.htmlFor = option.id;
-            label.innerHTML = option.text;
-            optionDiv.appendChild(label);
+            // Create option
+            data.reflexes.forEach((option) => {
+                const optionDiv = document.createElement('div')
+                optionDiv.setAttribute('class', 'option')
 
-            q5Options.appendChild(optionDiv);
-        })
-        // Show
-        document.getElementById('question-5').classList.remove('hidden');
-        } else {
-        alert('Diferencia mayor a 2 no esta implementado');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.id = option.id;
+                input.name = 'q5';
+                input.value = option.id;
+                input.addEventListener('change', function() {
+                    var buttons = document.forms['tone'].getElementsByTagName('button');
+                    for(var i = 0; i < buttons.length; i++) {
+                        if(buttons[i].type.toLowerCase() == 'submit') {
+                            buttons[i].disabled = false;
+                        }
+                    }
+                });
+                optionDiv.appendChild(input);
+
+                const label = document.createElement('label');
+                label.htmlFor = option.id;
+                label.innerHTML = option.text;
+                optionDiv.appendChild(label);
+
+                q5Options.appendChild(optionDiv);
+            })
+            // Show
+            document.getElementById('question-5').classList.remove('hidden');
         }
     }
 
