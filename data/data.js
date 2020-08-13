@@ -54,10 +54,11 @@ let reflex = [
     {id:'21.C', text:'Cenizas', tones:[6,7,8], products:['6.11', '7.11', '8.1', '8.13']},
     {id:'21.D', text:'Dorados y Beiges', tones:[6,7,8], products:['6.13', '7.3', '8.13']},
     {id:'21.E', text:'Marrones y Chocolates', tones:[5,6], products:['5.7', '6.23', '6.73']},
-    {id:'21.F', text:'Caobas', tones:[5], products:['5.5']},
-    {id:'21.G', text:'Violetas', tones:[5], products:['5.20']},
-    {id:'21.H', text:'Rojos', tones:[6,7], products:['6.66', '7.60'], redBased: true},
-    {id:'21.I', text:'Marrones y Chocolates', tones:[4,5,6,7], products:['4', '5', '6.11', '7.11'], redBased: true},
+    {id:'21.F', text:'Marrones y Chocolates', tones:[4,5,6,7], products:['4', '5', '6.11', '7.11'], onlyRedBased: true},
+    {id:'21.G', text:'Caobas', tones:[5], products:['5.5']},
+    {id:'21.H', text:'Violetas', tones:[5], products:['5.20']},
+    {id:'21.I', text:'Rojos', tones:[6,7], products:['6.66', '7.60']},
+    {id:'21.J', text:'Rojos', tones:[6,7], products:['6.66', '7.60'], onlyRedBased: true},
 ];
 
 let kbs = [
