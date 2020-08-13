@@ -45,8 +45,7 @@ function calculateTone(desired, rootTone, colored) {
     return { tones: suggestedtones, reflexes: filteredReflex };
 }
 
-
-function calculateColored (mediumToneSelected, rootToneSelected, desiredToneSelected) {
+function calculateColored (mediumToneSelected, rootToneSelected, desiredToneSelected, whitehair) {
     let mediumTone = data.mediumTones.find(color => color.id == mediumToneSelected);
     console.log('Medium Tone: ' + mediumTone.tone);
     
@@ -64,7 +63,7 @@ function calculateColored (mediumToneSelected, rootToneSelected, desiredToneSele
     return calculateTone(desired, mediumTone, true);
 }
 
-function calculateNatural (rootToneSelected, desiredToneSelected) {
+function calculateNatural (rootToneSelected, desiredToneSelected, whitehair) {
     let rootTone = data.rootTones.find(color => color.id == rootToneSelected);
     console.log('Root Tone: ' + rootTone.tone);
 
@@ -77,9 +76,9 @@ function calculateNatural (rootToneSelected, desiredToneSelected) {
 module.exports = {
     options: function(req, res) {
         if (req.params.q1 === '10.A') {
-            res.send(calculateColored(req.params.q2, req.params.q3, req.params.q4));
+            res.send(calculateColored(req.params.q2, req.params.q3, req.params.q4, req.params.q5));
         } else {
-            res.send(calculateNatural(req.params.q3, req.params.q4));
+            res.send(calculateNatural(req.params.q3, req.params.q4, req.params.q5));
         }
     }
 }

@@ -1,8 +1,17 @@
+let noWhiteHairProducts = ['6.23'];
+
 let onlyRedProducts = ['8.1'];
 
 let yesnoOptions = [
     {id:'10.A', text:'si'},
     {id:'10.B', text:'no'},
+];
+
+let whiteHair = [
+    {id:'17.A', text:'0%-10%', value:0},
+    {id:'17.B', text:'10-50%', value:1},
+    {id:'17.C', text:'60-90%', value:2},
+    {id:'17.D', text:'90-100%', value:3},
 ];
 
 let mediumTones = [
@@ -66,7 +75,8 @@ let kbs = [
     {id:2, question:'Tono en los medios', show: 'hidden', options: mediumTones},
     {id:3, question:'Tono en las raíces', show: 'hidden', options: rootTones},
     {id:4, question:'Resultado deseado', show: 'hidden', options: desiredTones},
-    {id:5, question:'Reflejos buscados', show: 'hidden', options: []},
+    {id:5, question:'Cantidad de canas', show: 'hidden', options: whiteHair},
+    {id:6, question:'Reflejos buscados', show: 'hidden', options: reflex},
 ];
 
-module.exports = { kbs, mediumTones, rootTones, desiredTones, reflex, onlyRedProducts };
+module.exports = { kbs, mediumTones, rootTones, desiredTones, reflex, onlyRedProducts, noWhiteHairProducts };

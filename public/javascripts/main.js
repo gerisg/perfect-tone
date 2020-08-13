@@ -34,10 +34,18 @@ for (var i=0, len=q3.length; i<len; i++) {
     });
 }
 
-// Answer q4 calculate available options and enable q5
+// Answer q4 enable q5
 var q4 = document.forms['tone'].elements['q4'];
 for (var i=0, len=q4.length; i<len; i++) {
     q4[i].addEventListener('change', function() {
+        document.getElementById('question-5').classList.remove('hidden');
+    });
+}
+
+// Answer q5 calculate available options and enable q6
+var q5 = document.forms['tone'].elements['q5'];
+for (var i=0, len=q5.length; i<len; i++) {
+    q5[i].addEventListener('change', function() {
     // Create a request variable and assign a new XMLHttpRequest object to it.
     var request = new XMLHttpRequest()
 
@@ -52,18 +60,18 @@ for (var i=0, len=q4.length; i<len; i++) {
         if (request.status >= 200 && request.status < 400) {
             // Begin accessing JSON data here
             var data = JSON.parse(this.response);
-            // Find options for Q5
-            var q5Options = null;
-            var q5Children = document.getElementById('question-5').childNodes;
-            for (var i = 0; i < q5Children.length; i++) {
-                if (q5Children[i].className == 'options') {
-                    q5Options = q5Children[i];
+            // Find options for Q6
+            var q6Options = null;
+            var q6Children = document.getElementById('question-6').childNodes;
+            for (var i = 0; i < q6Children.length; i++) {
+                if (q6Children[i].className == 'options') {
+                    q6Options = q6Children[i];
                     break;
                 }        
             }
 
             // Clean
-            q5Options.innerHTML = "";
+            q6Options.innerHTML = "";
             var inputs = document.forms['tone'].getElementsByTagName('input');
             for(var i = 0; i < inputs.length; i++) {
                 if(inputs[i].type.toLowerCase() == 'hidden') {
@@ -86,7 +94,7 @@ for (var i=0, len=q4.length; i<len; i++) {
                 const input = document.createElement('input');
                 input.type = 'radio';
                 input.id = option.id;
-                input.name = 'q5';
+                input.name = 'q6';
                 input.value = option.id;
                 input.addEventListener('change', function() {
                     var buttons = document.forms['tone'].getElementsByTagName('button');
@@ -103,10 +111,10 @@ for (var i=0, len=q4.length; i<len; i++) {
                 label.innerHTML = option.text;
                 optionDiv.appendChild(label);
 
-                q5Options.appendChild(optionDiv);
+                q6Options.appendChild(optionDiv);
             })
             // Show
-            document.getElementById('question-5').classList.remove('hidden');
+            document.getElementById('question-6').classList.remove('hidden');
         }
     }
 
