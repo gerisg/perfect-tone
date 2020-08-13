@@ -1,4 +1,4 @@
-const data = require('../data/data');
+const data = require('../database/data');
 
 function getText(id) {
     let text = "";

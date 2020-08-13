@@ -1,4 +1,4 @@
-const data = require('../data/data');
+const data = require('../database/data');
 
 let dark = (tone, qty) => --tone;
 let light = (tone, qty) => ++tone;
