@@ -42,10 +42,10 @@ let rootTones = [
 ];
 
 let desiredTones = [
-    {id:'19.A', text:'Más claro', tone:1},
-    {id:'19.B', text:'Igual', tone:0},
-    {id:'19.C', text:'Más oscuro', tone:-1},
-    {id:'19.D', text:'No lo sé', tone:'*'}
+    {id:'19.A', text:'Más claro', value:'light'},
+    {id:'19.B', text:'Igual', value:'equal'},
+    {id:'19.C', text:'Más oscuro', value:'dark'},
+    {id:'19.D', text:'No lo sé', value:'unknown'}
 ];
 
 let reflex = [

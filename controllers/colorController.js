@@ -1,17 +1,34 @@
 const data = require('../data/data');
 
-function calculateTone(colored, desired, rootTone) {
+let dark = (tone, qty) => --tone;
+let light = (tone, qty) => ++tone;
+
+function avoidInvalidTone(tone, operation) {
+    let newTone = operation(tone);
+    if(newTone == 2) { newTone = operation(newTone); }
+    return newTone;
+}
+
+function calculateTone(desired, rootTone, colored) {
     let suggestedtones = [];
-    if (desired.tone == '*') {
-        // Si no sabe le voy a mostrar un tono más, un tono igual y un tono menos 
-        suggestedtones.push(rootTone.tone -1); // tono más oscuro
-        suggestedtones.push(rootTone.tone); // mismo tono
-        if(!colored) { suggestedtones.push(rootTone.tone +1); } // tono más claro
-    } else {
-        // Si sabe, le suma o resta un tono, o lo deja igual
-        suggestedtones.push(rootTone.tone + desired.tone);
+    switch (desired.value) {
+        case 'equal':
+            suggestedtones.push(rootTone.tone);
+            break;
+        case 'light':
+            suggestedtones.push(avoidInvalidTone(rootTone.tone, light));
+            break;
+        case 'dark':
+            suggestedtones.push(avoidInvalidTone(rootTone.tone, dark));
+            break;
+        default:
+            if(!colored) { suggestedtones.push(avoidInvalidTone(rootTone.tone, light)); }
+            suggestedtones.push(rootTone.tone);
+            suggestedtones.push(avoidInvalidTone(rootTone.tone, dark));
     }
+
     console.log("suggested: " + suggestedtones);
+
     let filteredReflex = data.reflex.filter( // Filtro los reflejos que tienen al menos uno de los tonos sugeridos
         r => suggestedtones.map(
             suggestion => r.tones.includes(suggestion)).reduce( 
@@ -30,14 +47,14 @@ function calculateColored (mediumToneSelected, rootToneSelected, desiredToneSele
     console.log('Root Tone: ' + rootTone.tone);
     
     let desired = data.desiredTones.find(desired => desired.id == desiredToneSelected);
-    console.log('Desired Tone: ' + desired.tone);
+    console.log('Desired Tone: ' + desired.value);
     
     let diff = mediumTone.tone - rootTone.tone;
     if(diff == 0) {
-        return calculateTone(true, desired, rootTone);
+        return calculateTone(desired, rootTone, true);
     }
     
-    return calculateTone(true, desired, mediumTone);
+    return calculateTone(desired, mediumTone, true);
 }
 
 function calculateNatural (rootToneSelected, desiredToneSelected) {
@@ -45,9 +62,9 @@ function calculateNatural (rootToneSelected, desiredToneSelected) {
     console.log('Root Tone: ' + rootTone.tone);
 
     let desired = data.desiredTones.find(desired => desired.id == desiredToneSelected);
-    console.log('Desired Tone: ' + desired.tone);
+    console.log('Desired Tone: ' + desired.value);
 
-    return calculateTone(false, desired, rootTone);
+    return calculateTone(desired, rootTone, false);
 }
 
 module.exports = {
