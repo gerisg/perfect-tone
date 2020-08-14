@@ -11,6 +11,7 @@ function save(feedback) {
         q3: feedback.q3,
         q4: feedback.q4,
         q5: feedback.q5,
+        q6: feedback.q6,
         products: feedback.products,
         accept: feedback.agree,
         comment: feedback.comment
