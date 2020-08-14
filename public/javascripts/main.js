@@ -51,9 +51,9 @@ for (var i=0, len=q5.length; i<len; i++) {
 
     // Open a new connection, using the GET request on the URL endpoint
     if (q2.value) {
-        request.open('GET', `https://quiz.cobeauty.store/options/${q1.value}/${q2.value}/${q3.value}/${this.value}`, true)
+        request.open('GET', `https://quiz.cobeauty.store/options/${q1.value}/${q2.value}/${q3.value}/${q4.value}/${this.value}`, true)
     } else {
-        request.open('GET', `https://quiz.cobeauty.store/options/${q1.value}/${q3.value}/${this.value}`, true)
+        request.open('GET', `https://quiz.cobeauty.store/options/${q1.value}/${q3.value}/${q4.value}/${this.value}`, true)
     }
     
     request.onload = function () {
