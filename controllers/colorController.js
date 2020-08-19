@@ -9,22 +9,23 @@ function avoidInvalidTone(tone, operation) {
     return newTone;
 }
 
-function calculateTone(desired, rootTone, colored) {
+function calculateTone(desired, tone, colored) {
     let suggestedtones = [];
     switch (desired.value) {
         case 'equal':
-            suggestedtones.push(rootTone.tone);
+            suggestedtones.push(tone.tone);
             break;
         case 'light':
-            suggestedtones.push(avoidInvalidTone(rootTone.tone, light));
+            suggestedtones.push(avoidInvalidTone(tone.tone, light));
+            if(!colored && tone.tone >= 5) { suggestedtones.push(avoidInvalidTone(tone.tone + 1, light)); }
             break;
         case 'dark':
-            suggestedtones.push(avoidInvalidTone(rootTone.tone, dark));
+            suggestedtones.push(avoidInvalidTone(tone.tone, dark));
             break;
         default:
-            if(!colored) { suggestedtones.push(avoidInvalidTone(rootTone.tone, light)); }
-            suggestedtones.push(rootTone.tone);
-            suggestedtones.push(avoidInvalidTone(rootTone.tone, dark));
+            if(!colored) { suggestedtones.push(avoidInvalidTone(tone.tone, light)); }
+            suggestedtones.push(tone.tone);
+            suggestedtones.push(avoidInvalidTone(tone.tone, dark));
     }
 
     console.log("suggested: " + suggestedtones);
@@ -36,7 +37,7 @@ function calculateTone(desired, rootTone, colored) {
                 (result, current) => result || current)); // Puede devolver múltiples true/false entonces los reduzco
     
     // Filtro los reflejos según si aplican a rojos o no
-    filteredReflex = rootTone.category == 'rojos' ? 
+    filteredReflex = tone.category == 'rojos' ? 
         filteredReflex.filter(reflex => reflex.onlyRedBased) : 
         filteredReflex.filter(reflex => typeof(reflex.onlyRedBased) == 'undefined' || !reflex.onlyRedBased);
 
