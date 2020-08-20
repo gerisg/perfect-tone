@@ -1,6 +1,6 @@
-let noWhiteHairProducts = ['6.23'];
-
-let onlyRedProducts = ['8.1'];
+// TODO Falta 'colors' con las siguientes properties:
+let noWhiteHairColors = ['6.23'];
+let onlyRedColors = ['8.1'];
 
 let yesnoOptions = [
     {id:'10.A', text:'si'},
@@ -9,7 +9,7 @@ let yesnoOptions = [
 
 let whiteHair = [
     {id:'17.A', text:'0%-10%', value:0},
-    {id:'17.B', text:'10-50%', value:1},
+    {id:'17.B', text:'10-60%', value:1},
     {id:'17.C', text:'60-90%', value:2},
     {id:'17.D', text:'90-100%', value:3},
 ];
@@ -58,8 +58,8 @@ let desiredTones = [
 let reflex = [
     {id:'21.A', text:'Azulado', tones:[1], products:['1.A']},
     {id:'21.B', text:'Naturales', tones:[1,3,4,5,6,7,8,9], products:['1','3','4','5','6','7','8','9']},
-    {id:'21.C', text:'Cenizas', tones:[6,7,8], products:['6.11', '7.11', '8.1', '8.13']},
-    {id:'21.D', text:'Dorados y Beiges', tones:[6,7,8], products:['6.13', '7.3', '8.13']},
+    {id:'21.C', text:'Cenizas', tones:[6,7,8], products:['6.11', '7.11', '8.1', '8.13'], filterWhiteHair: [['8.13'], ['8.13'], ['8.13'], []]}, // Filter colors by whitehair [0,1,2,3]
+    {id:'21.D', text:'Dorados y Beiges', tones:[6,7,8], products:['6.13', '7.3', '8.13'], filterWhiteHair: [[], [], [], ['8.13']]},
     {id:'21.E', text:'Marrones y Chocolates', tones:[5,6], products:['5.7', '6.23', '6.73']},
     {id:'21.F', text:'Marrones y Chocolates', tones:[4,5,6,7], products:['4', '5', '6.11', '7.11'], onlyRedBased: true},
     {id:'21.G', text:'Caobas', tones:[5], products:['5.5']},
@@ -77,4 +77,4 @@ let kbs = [
     {id:6, question:'Reflejos buscados', show: 'hidden', options: reflex},
 ];
 
-module.exports = { kbs, mediumTones, rootTones, desiredTones, reflex, onlyRedProducts, noWhiteHairProducts };
+module.exports = { kbs, mediumTones, rootTones, desiredTones, whiteHair, reflex, onlyRedProducts: onlyRedColors, noWhiteHairProducts: noWhiteHairColors };
