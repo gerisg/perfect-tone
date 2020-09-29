@@ -110,7 +110,7 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener("click", function(eve
             showSlide(next);
             break;
         case 9: // Reflejos requiere data del BE
-            postData('http://localhost:3000/api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
+            postData('https://quiz.cobeauty.store/api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
                 .then(data => { 
                     let reflexTemplate = document.getElementById('reflex-tpl');
                     let reflexes = data.reflexes;
