@@ -1,3 +1,28 @@
+// Mostrar un slide del wizard
+function showSlide(n) {
+    console.log('show slide ' + n);
+    let slides = document.getElementsByClassName('question-wrapper');
+    let current = n > slides.length || n < 1 ? 1 : n;
+    for (let i = 0; i < slides.length; i++)
+        slides[i].style.display = 'none';
+    slides[current-1].style.display = 'block';
+}
+
+function init() {
+    // Logo Home
+    document.getElementsByTagName('header')[0].classList.add('main');
+    
+    // Slide inicial
+    showSlide(1);
+
+    // Limpieza de storage y form
+    localStorage.clear();
+    localStorage.setItem('current', 1);
+    document.getElementById("prefectTone").reset();
+}
+
+init();
+
 // Enviar datos por POST
 async function postData(url = '', data = {}) {
     const response = await fetch(url, {
@@ -13,31 +38,26 @@ async function postData(url = '', data = {}) {
     return response.json();
 }
 
-// Mostrar un slide del wizard
-function showSlide(n) {
-    let slides = document.getElementsByClassName('question-wrapper');
-    let current = n > slides.length || n < 1 ? 1 : n;
-    for (let i = 0; i < slides.length; i++)
-        slides[i].style.display = 'none';
-    slides[current-1].style.display = 'block';
-}
-
-// Clean local storage y arranca en el slide 1
-window.addEventListener('load', function() {
-    localStorage.clear();
-    localStorage.setItem('current', 1);
-    document.getElementsByTagName('header')[0].classList.add('main'); // Muestra el logo más grande en el home
-    showSlide(1);
-});
-
 // Reflejo
 let reflexAnswer = document.getElementById("reflex");
+
+// Teñido
+let dyedAnswer = document.getElementById("dyedAnswer");
+let dyedOptions = dyedAnswer.parentNode.querySelectorAll('input[type="radio"]');
+Array.prototype.find.call(dyedOptions, dyedOption => {
+    dyedOption.addEventListener('click', function(e){
+        Array.prototype.forEach.call(dyedOptions, dyedOption => dyedOption.parentNode.parentNode.classList.remove('selected'));
+        this.parentNode.parentNode.classList.add("selected");
+        // Guardo la respuesta que se envia en el Form
+        dyedAnswer.value = this.value;
+    });
+});
 
 // Color de pelo teñido
 let currentToneAnswer = document.getElementById("currentTone");
 let currentToneBtns = document.getElementsByClassName("current-tone-btn");
 Array.prototype.forEach.call(currentToneBtns, currentToneBtn => {
-    currentToneBtn.addEventListener("click", function(e){
+    currentToneBtn.addEventListener('click', function(e){
         e.preventDefault();
         Array.prototype.forEach.call(currentToneBtns, ct => ct.classList.remove('selected'));
         this.classList.add("selected");
@@ -50,7 +70,7 @@ Array.prototype.forEach.call(currentToneBtns, currentToneBtn => {
 let naturalToneAnswer = document.getElementById("naturalTone");
 let naturalToneBtns = document.getElementsByClassName("natural-tone-btn");
 Array.prototype.forEach.call(naturalToneBtns, naturalToneBtn => {
-    naturalToneBtn.addEventListener("click", function(e){
+    naturalToneBtn.addEventListener('click', function(e){
         e.preventDefault();
         Array.prototype.forEach.call(naturalToneBtns, nt => nt.classList.remove('selected'));
         this.classList.add("selected");
@@ -63,7 +83,7 @@ Array.prototype.forEach.call(naturalToneBtns, naturalToneBtn => {
 let desiredToneAnswer = document.getElementById("desiredTone");
 let desiredToneBtns = document.getElementsByClassName("desired-tone-btn");
 Array.prototype.forEach.call(desiredToneBtns, desiredToneBtn => {
-    desiredToneBtn.addEventListener("click", function(e){
+    desiredToneBtn.addEventListener('click', function(e){
         e.preventDefault();
         Array.prototype.forEach.call(desiredToneBtns, dt => dt.classList.remove('selected'));
         this.classList.add("selected");
@@ -76,7 +96,7 @@ Array.prototype.forEach.call(desiredToneBtns, desiredToneBtn => {
 let greyHairAnswer = document.getElementById("greyHair");
 let greyHairBtns = document.getElementsByClassName("grey-hair-btn");
 Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
-    greyHairBtn.addEventListener("click", function(e){
+    greyHairBtn.addEventListener('click', function(e){
         e.preventDefault();
         Array.prototype.forEach.call(greyHairBtns, gh => gh.classList.remove('selected'));
         this.classList.add("selected");
@@ -86,7 +106,7 @@ Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
 });
 
 let submitBtns = document.querySelectorAll('button[type="continue"]');
-submitBtns.forEach(submitBtn => submitBtn.addEventListener("click", function(event){
+submitBtns.forEach(submitBtn => submitBtn.addEventListener('click', function(event){
     // No enviar el form
     event.preventDefault();
     // Mostrar logo normal
@@ -94,20 +114,21 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener("click", function(eve
     // Qué slide mostrar?
     let current = parseInt(localStorage.current);
     // 
+    console.log(current);
     switch (current) {
         case 3: // Teñido preguntar tono actual (slide 4), sino preguntar tono en raíces (slide 6)
-            let dyeds = document.getElementsByName('dyed');  
-            let dyed = Array.prototype.find.call(dyeds, dyed => dyed.checked);
-            let next = 6;
-            if(dyed.value == 'yes') {
-                next = 4;
-                // Si tiene teñido no puede aclarar
-                let lightDesiredTone = document.getElementsByClassName('desired-tone-btn')[0];
-                lightDesiredTone.disabled = true;
-                lightDesiredTone.parentElement.style.opacity = .5;
+            if(dyedAnswer.value) {
+                let next = 6;
+                if(dyedAnswer.value == 'yes') {
+                    next = 4;
+                    // Si tiene teñido no puede aclarar
+                    let lightDesiredTone = document.getElementsByClassName('desired-tone-btn')[0];
+                    lightDesiredTone.disabled = true;
+                    lightDesiredTone.parentElement.style.opacity = .5;
+                }
+                localStorage.current = next;
+                showSlide(next);
             }
-            localStorage.current = next;
-            showSlide(next);
             break;
         case 9: // Reflejos requiere data del BE
             postData('https://quiz.cobeauty.store/api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
@@ -125,7 +146,7 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener("click", function(eve
                             reflexNode.childNodes[1].childNodes[3].childNodes[1].src = `/images/reflex/${reflexProd.img}`;
                             reflexNode.childNodes[1].childNodes[3].childNodes[3].childNodes[3].innerHTML = `${reflex.text} (${reflexProd.id})`;
                             // En cada click muesto un check y guardo la respuesta
-                            reflexNode.childNodes[1].childNodes[1].addEventListener("click", function(e){
+                            reflexNode.childNodes[1].childNodes[1].addEventListener('click', function(e){
                                 e.preventDefault();
                                 let reflexesBtns = document.getElementsByClassName("reflex-btn");
                                 Array.prototype.forEach.call(reflexesBtns, rb => rb.classList.remove('selected'));
@@ -142,7 +163,7 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener("click", function(eve
             showSlide(current);
             break;
         case 10:
-            document.getElementById("prefectTone").submit(); 
+            document.getElementById("prefectTone").submit();
             localStorage.clear();
             break;
         default:
