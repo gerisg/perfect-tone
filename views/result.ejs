@@ -1,85 +1,27 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoBeauty - Result</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <div class="container">
-      <nav>
-        <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/rules">Reglas</a></li>
-        </ul>
-      </nav>
-      <main class="results">
-        <h1>Tu Tono Perfecto</h1>
-        <h2>Basado en su selección:</h2>
-        <ul>
-          <li><b>Teñido: </b><span class="selection"><%= q1 %></span></li>
-          <li><b>Tono en medios: </b><span class="selection"><%= q2 %></span></li>
-          <li><b>Tono en raíces: </b><span class="selection"><%= q3 %></span></li>
-          <li><b>Resultado deseado: </b><span class="selection"><%= q4 %></span></li>
-          <li><b>Canas: </b><span class="selection"><%= q5 %></span></li>
-          <li><b>Reflejos esperados: </b><span class="selection"><%= q6 %></span></li>
-        </ul>
-        <h2>CoBeauty sugiere:</h2>
-        <div class="products">
-          <ul>
-            <% for(let index=0; index<products.length; index++ ) { %>
-              <li>
-                <b>Opción <%= index+1 %>: </b>
-                <span class="product"><%= products[index] %></span>
-              </li>
-            <% } %>
-          </ul>
+<html lang="en">
+<%- include('./partials/head') %>
+<body>
+    <%- include('./partials/header') %>
+    <main class="row main-center">
+        <div class="col-10">
+            <p class="question-title">Basándonos en tus selecciones, Cobeauty te recomienda</p>
+                <section class="result">
+                    <p>Nombre: <%= result.name %></p>
+                    <p>Teñido: <%= result.dyed %></p>
+                    <p>Tono actual: <%= result.currentTone %></p>
+                    <p>Tono natural: <%= result.naturalTone %></p>
+                    <p>Tono deseado: <%= result.desiredTone %></p>
+                    <p>Canas: <%= result.greyHair %></p>
+                    <p>Reflejo: <%= result.reflex %></p>
+                </section>
+                <div class="btn-group">
+                    <input id="greyHair" type="hidden" name="greyHair" value="">
+                    <a class="btn btn-text" href="http://cobeauty.store">Cobeauty</a>
+                    <a class="btn btn-icon" href="http://cobeauty.store"><i class="icon-right"></i></a>
+                </div>
+            </form>
         </div>
-        <h2>¿Estás de acuerdo con el producto sugerido?</h2>
-        <div class="feedback">
-          <form name="feedback" action="/feedback/save" method="POST">
-            <div class="agree">
-              <input type="radio" id="yes" name="agree" value="yes">
-              <label for="yes">Si</label>
-              <input type="radio" id="no" name="agree" value="no">
-              <label for="no">No</label>
-            </div>
-            <div class="comment">
-              <textarea name="comment" id="comment" rows="5" placeholder="Recordatorio opcional"></textarea>
-            </div>
-            <div class="hidden">
-              <input type="hidden" name="q1" value="<%= q1 %>">
-              <input type="hidden" name="q2" value="<%= q2 %>">
-              <input type="hidden" name="q3" value="<%= q3 %>">
-              <input type="hidden" name="q4" value="<%= q4 %>">
-              <input type="hidden" name="q5" value="<%= q5 %>">
-              <input type="hidden" name="q6" value="<%= q6 %>">
-              <input type="hidden" name="products" value="<%= products %>">
-            </div>
-            <div class="actions">
-              <button type="submit" class="btn btn-primary" disabled>Enviar</button>
-              <a href="/" type="reset">Reiniciar</a>
-            </div>
-          </form>
-        </div>
-      </main>
-    </div>
-    <script>
-      (function() {
-        var form = document.forms['feedback'];
-        var agree = form.elements['agree'];
-        for (var i=0, len=agree.length; i<len; i++) {
-          agree[i].addEventListener('change', function() {
-            var buttons = form.getElementsByTagName('button');
-            for (var b=0, len=buttons.length; b<len; b++) {
-              if(buttons[b].type.toLowerCase() == 'submit') {
-                buttons[b].disabled = false;
-              }
-            }
-          });
-        }
-      }());
-    </script>
-  </body>
+    </main>
+</body>
 </html>

@@ -1,13 +1,17 @@
 {
-  "name": "cobeauty",
+  "name": "perfect-tone",
   "version": "1.0.0",
+  "description": "Encuentra tu tono perfecto",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "startdev": "nodemon --ignore 'data/*' app.js "
+    "startdev": "nodemon -e 'js,ejs' app.js"
   },
+  "author": "Quantify",
+  "license": "ISC",
   "dependencies": {
-    "ejs": "~2.6.1",
-    "express": "~4.16.1"
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

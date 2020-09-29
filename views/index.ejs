@@ -1,51 +1,642 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoBeauty</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <div class="container">
-      <nav>
-        <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/rules">Reglas</a></li>
-        </ul>
-      </nav>
-      <main>
-        <h1>Cuestionario</h1>
-        <form name="tone" action="/result" method="post">
-  
-          <div class="wrapper">
-            <% kbs.forEach(kb => { %>
-            
-            <div id="question-<%= kb.id %>" class="question <%= kb.show %>">  
-              <p class="title"><%= kb.question %></p>
-              <div class="options">
-                <% kb.options.forEach(option => { %>
+<html lang="en">
+<%- include('./partials/head') %>
+<body>
+    <%- include('./partials/header') %>
+    <main class="row main-center home">
+        <div class="col-10">
+            <form id="prefectTone" action="/recommend" method="post">
                 
-                  <div class="option">
-                  <input type="radio" id="<%= option.id %>" name="q<%= kb.id %>" value="<%= option.id %>">
-                  <label for="<%= option.id %>" class="<%= option.category %>"><%= option.text %> <%= option.tone %></label>
+                <div id="slide-1" class="question-wrapper">
+                    <p class="title">Encontrá tu Tono Perfecto</p>
+                    <div class="square">
+                        <figure>
+                            <img src="/images/heart-icon.png" alt="icono corazón">
+                        </figure>
+                    </div>
+                    <p class="content">¿Rojo o rubio? ¿Cómo me quedará? ¿Y si no me gusta? Las decisiones sobre nuestro estilo y particularmente sobre nuestro cabello pueden ser díficles. Por eso desarrollamos este cuestionario que pone a tu alcance tecnología de avanzada para guiarte en la elección de tu Tono Perfecto.</p>
+                    <p class="content-em">¡Animate y hacé click!, queremos recorrer junto a vos este maravilloso proceso de encontrar <span class="content-extra-em">tu propia idea de belleza.</span></p>
                 </div>
-  
-                <% }); %>
-              </div>
-            </div>
-  
-            <% }); %>
-          </div>
-  
-          <div class="actions">
-            <button type="submit" class="btn btn-primary" disabled>Recomendar</button>
-            <a href="/" type="reset">Reiniciar</a>
-          </div>
-  
-        </form>
-      </main>
-    </div>
-    <script src="/javascripts/main.js"></script>
-  </body>
+
+                <div id="slide-2" class="question-wrapper">
+                    <p class="question-title">Empecemos con lo más importante, ¿cómo te llamás?</p>
+                    <section class="question">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Nombre" class="question-name">
+                        </div>
+                    </section>
+                </div>
+
+                <div id="slide-3" class="question-wrapper">
+                    <p class="question-title">¿Tenés el cabello teñido?</p>
+                    <section class="question yes-no">
+                        <div class="row column cross-center">
+                            <!-- ANSWER dyed hair -->
+                            <div class="square-radio yes option-inside">
+                                <label>si<input type="radio" name="dyed" value="yes"></label>
+                            </div>
+                            <div class="square-radio no option-inside">
+                                <label>no<input type="radio" name="dyed" value="no"></label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="slide-4" class="question-wrapper">
+                    <p class="question-title">¿Cuál es el tono de color que usás actualmente?</p>
+                    <section class="question">
+                        <p class="content">Elige en la siguiente pantalla el color que más se asemeje a la parte media de tu cabello. Si tenés el cabello corto concéntrate en las puntas y no en las raíces.</p>
+                        <figure class="question-help">
+                            <img src="/images/mid.png" alt="Tonos medios" />
+                        </figure>
+                    </section>
+                </div>
+
+                <div id="slide-5" class="question-wrapper">
+                    <p class="question-title">¿Cuál es el tono de color que usás actualmente?</p>
+                    <!-- ANSWER current tone -->
+                    <input id="currentTone" type="hidden" name="currentTone" value="">
+                    <section class="question tones">
+                        <span>Negros</span>
+                        <div class="row nowrap slider main-center">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="3"></input>
+                                    <figure>
+                                        <img src="/images/tones/blacks/3.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño Oscuro (3)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="1"></input>
+                                    <figure>
+                                        <img src="/images/tones/blacks/1.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Negro (1)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Marrones</span>
+                        <div class="row nowrap slider">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="7.7"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/7-7.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Marrón (7.7)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="6.7"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/6-7.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Oscuro Marrón (6.7)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="5"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/5.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño Claro (5)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="4"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/4.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño (4)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Rubios</span>
+                        <div class="row nowrap slider">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="10"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/10.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Extra Claro (10)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="9"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/9.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Muy Claro (9)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="8"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/8.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Claro (8)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="7"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/7.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio (7)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="6"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/6.jpg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Oscuro (6)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Rojos y Cobrizos</span>
+                        <div class="row nowrap slider">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="7.60"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/7-60.jpg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio rojizo intenso (7.60)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="6.66"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/6-66.jpg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio oscuro rojo profundo (6.66)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="7.4"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/7-4.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio cobrizo (7.4)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="6.46"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/6-46.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio oscuro cobre rojizo (6.46)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="5.46"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/5-46.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño claro cobre rojizo (5.46)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Caobas y Violetas</span>
+                        <div class="row nowrap slider main-center">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="5.5"></input>
+                                    <figure>
+                                        <img src="/images/tones/reddish-brown/5-5.jpg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño claro caoba (5.5)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="current-tone-btn" value="5.20"></input>
+                                    <figure>
+                                        <img src="/images/tones/reddish-brown/5-20.jpg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño claro malva intenso (5.20)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div id="slide-6" class="question-wrapper">
+                    <section class="question">
+                        <p class="content">Elige en la siguiente pantalla el color que más se asemeje a tu color natural. Si tenés canas, deberás indicar el color que se encuentran entre los cabellos grises.</p>
+                        <figure class="question-help">
+                            <img src="/images/roots.png" alt="Tonos raíces" />
+                        </figure>
+                    </section>
+                </div>
+                
+                <div id="slide-7" class="question-wrapper">
+                    <p class="question-title">¿Cuál es tu tono de color natural en las raíces?</p>
+                    <!-- ANSWER natural tone -->
+                    <input id="naturalTone" type="hidden" name="naturalTone" value="">
+                    <section class="question tones">
+                        <span>Negros</span>
+                        <div class="row nowrap slider main-center">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="3"></input>
+                                    <figure>
+                                        <img src="/images/tones/blacks/3.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño Oscuro (3)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="1"></input>
+                                    <figure>
+                                        <img src="/images/tones/blacks/1.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Negro (1)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Marrones</span>
+                        <div class="row nowrap slider">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="7.7"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/7-7.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Marrón (7.7)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="6.7"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/6-7.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Oscuro Marrón (6.7)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="5"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/5.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño Claro (5)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="4"></input>
+                                    <figure>
+                                        <img src="/images/tones/browns/4.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño (4)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Rubios</span>
+                        <div class="row nowrap slider">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="10"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/10.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Extra Claro (10)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="9"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/9.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Muy Claro (9)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="8"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/8.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Claro (8)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="7"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/7.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio (7)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="6"></input>
+                                    <figure>
+                                        <img src="/images/tones/blondes/6.jpg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio Oscuro (6)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                        <span>Rojos</span>
+                        <div class="row nowrap slider">
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="7.4"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/7-4.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio cobrizo (7.4)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="6.46"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/6-46.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Rubio oscuro cobre rojizo (6.46)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-5 slide">
+                                <article class="tone">
+                                    <input type="button" class="natural-tone-btn" value="5.46"></input>
+                                    <figure>
+                                        <img src="/images/tones/reds/5-46.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Castaño claro cobre rojizo (5.46)</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div id="slide-8" class="question-wrapper">
+                    <p class="question-title">¿Cuál es el resultado que estás esperando lograr?</p>
+                    <p class="content">Mientras más puedas decirnos acerca de lo que esperas lograr, mejor podremos ayudarte.</p>
+                    <!-- ANSWER desired tone -->
+                    <input id="desiredTone" type="hidden" name="desiredTone" value="">
+                    <section class="question">
+                        <div class="row">
+                            <div class="col-6">
+                                <article class="option">
+                                    <input type="button" class="desired-tone-btn" value="light"></input>
+                                    <figure>
+                                        <img src="/images/heart-light.png" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Más claro</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-6">
+                                <article class="option">
+                                    <input type="button" class="desired-tone-btn" value="dark"></input>
+                                    <figure>
+                                        <img src="/images/heart-dark.png" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Más oscuro</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-6">
+                                <article class="option">
+                                    <input type="button" class="desired-tone-btn" value="equal"></input>
+                                    <figure>
+                                        <img src="/images/heart-current.png" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>Igual</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-6">
+                                <article class="option">
+                                    <input type="button" class="desired-tone-btn" value="unknown"></input>
+                                    <figure>
+                                        <img src="/images/heart-color.png" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>No lo sé</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div id="slide-9" class="question-wrapper">
+                    <p class="question-title">¿Cuál es el porcentaje de canas en tus raíces?</p>
+                    <p class="content">Si no podés decidir entre dos valores, seleccionar el más alto para alcanzar mejores resultados.</p>
+                    <!-- ANSWER grey hairs -->
+                    <input id="greyHair" type="hidden" name="greyHair" value="">
+                    <section class="question">
+                        <div class="row">
+                            <div class="col-6">
+                                <article class="tone">
+                                    <input type="button" class="grey-hair-btn" value="0"></input>
+                                    <figure>
+                                        <img src="/images/roots/00.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>0% - 10%</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-6">
+                                <article class="tone">
+                                    <input type="button" class="grey-hair-btn" value="1"></input>
+                                    <figure>
+                                        <img src="/images/roots/10.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>10% - 60%</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-6">
+                                <article class="tone">
+                                    <input type="button" class="grey-hair-btn" value="2"></input>
+                                    <figure>
+                                        <img src="/images/roots/60.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>60% - 90%</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                            <div class="col-6">
+                                <article class="tone">
+                                    <input type="button" class="grey-hair-btn" value="3"></input>
+                                    <figure>
+                                        <img src="/images/roots/90.jpeg" alt="">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span>90% - 100%</span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="slide-10" class="question-wrapper">
+                    <p class="question-title">¿Qué sutiles reflejos o matices de color te gustaría se vean en tu cabello?</p>
+                    <p class="content">El color del cabello se percibe de manera multidimensional, ya que no es plano.</p>
+                    <!-- ANSWER reflex -->
+                    <input id="reflex" type="hidden" name="reflex" value="">
+                    <section class="question tones">
+                        <div class="row">
+                            <div id="reflex-tpl" class="col-6">
+                                <article class="tone">
+                                    <input type="button" class="reflex-btn" value=""></input>
+                                    <figure>
+                                        <img src="" alt="imagen de reflejo">
+                                        <figcaption>
+                                            <i class="icon-check"></i>
+                                            <span></span>
+                                        </figcaption>
+                                    </figure>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="btn-group">
+                    <button type="continue" class="btn btn-text">continuar</button>
+                    <button type="continue" class="btn btn-icon"><i class="icon-right"></i></button>
+                </div>
+            
+            </form>
+        </div>
+    </main>
+    <script src="/js/main.js"></script>
+</body>
 </html>

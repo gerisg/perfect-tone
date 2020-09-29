@@ -12,24 +12,36 @@ let model = function(tableName) {
         writeFile(contents) {
             fs.writeFileSync(this.filePath, JSON.stringify(contents, null, " "));
         },
+        nextId() {
+            let rows = this.readFile();
+            return rows.reduce((max,curr) => Math.max(max, curr.id),0) + 1;
+        },
         all() {
             return this.readFile();
         },
-        find(id) {
+        findByPk(id) {
             let rows = this.readFile();
             return rows.find(row => row.id == id);
         },
-        findByFields(fields, value) {
-            if(!fields || !value) { return []; }
+        findOne(field, value) {
+            if(!field || !value) { return undefined; }
             let rows = this.readFile();
-            return rows.filter(row => 
-                fields.find(field => 
-                    row[field] && row[field].toLowerCase().includes(value.toLowerCase())
-                ));
+            return rows.find(row => row[field] == value);
         },
-        nextId() {
+        findAll(field, value) {
+            if(!field || !value) { return []; }
             let rows = this.readFile();
-            return rows.reduce((max,curr) => Math.max(max, curr.id),0) +1;
+            return rows.filter(row => row[field] == value);
+        },
+        findOneByField(field, value) {
+            if(!field || !value) { return ''; }
+            let rows = this.readFile();
+            return rows.find(row => row[field] && row[field].toLowerCase() == value.toLowerCase());
+        },
+        findByMultivalueField(field, value) {
+            if(!field || !value) { return []; }
+            let rows = this.readFile();
+            return rows.filter(row => row[field].includes(value));
         },
         create(row) {
             row.id = this.nextId();
