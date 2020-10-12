@@ -11,7 +11,7 @@
                     <p class="title">Encontrá tu Tono Perfecto</p>
                     <div class="square">
                         <figure>
-                            <img src="/images/heart-icon.png" alt="icono corazón">
+                            <img src="/images/heart-icon.webp" alt="icono corazón">
                         </figure>
                     </div>
                     <p class="content">¿Rojo o rubio? ¿Cómo me quedará? ¿Y si no me gusta? Las decisiones sobre nuestro estilo y particularmente sobre nuestro cabello pueden ser díficles. Por eso desarrollamos este cuestionario que pone a tu alcance tecnología de avanzada para guiarte en la elección de tu Tono Perfecto.</p>
@@ -48,7 +48,7 @@
                     <section class="question">
                         <p class="content">Elige en la siguiente pantalla el color que más se asemeje a la parte media de tu cabello. Si tenés el cabello corto concéntrate en las puntas y no en las raíces.</p>
                         <figure class="question-help">
-                            <img src="/images/mid.png" alt="Tonos medios" />
+                            <img src="/images/mid.webp" alt="Tonos medios" />
                         </figure>
                     </section>
                 </div>
@@ -58,237 +58,25 @@
                     <!-- ANSWER current tone -->
                     <input id="currentTone" type="hidden" name="currentTone" value="">
                     <section class="question tones">
-                        <span>Negros</span>
-                        <div class="row nowrap slider main-center">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="3"></input>
-                                    <figure>
-                                        <img src="/images/tones/blacks/3.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño Oscuro (3)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
+                        <% Object.keys(currentTones).forEach(toneFamily => { %>
+                            <span><%= toneFamily %></span>
+                            <div class="row nowrap slider">
+                                <% currentTones[toneFamily].forEach(tone => { %>
+                                    <div class="col-5 col-md-4 col-lg-3 slide">
+                                        <article class="tone">
+                                            <input type="button" class="current-tone-btn" value="<%= tone.value %>"></input>
+                                            <figure>
+                                                <img src="/images/tones/<%= tone.img %>" alt="tono actual">
+                                                <figcaption>
+                                                    <i class="icon-check"></i>
+                                                    <span><%= tone.text %>(<%= tone.value %>)</span>
+                                                </figcaption>
+                                            </figure>
+                                        </article>
+                                    </div>
+                                <% }) %>
                             </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="1"></input>
-                                    <figure>
-                                        <img src="/images/tones/blacks/1.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Negro (1)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Marrones</span>
-                        <div class="row nowrap slider">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="7.7"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/7-7.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Marrón (7.7)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="6.7"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/6-7.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Oscuro Marrón (6.7)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="5"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/5.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño Claro (5)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="4"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/4.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño (4)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Rubios</span>
-                        <div class="row nowrap slider">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="10"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/10.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Extra Claro (10)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="9"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/9.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Muy Claro (9)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="8"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/8.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Claro (8)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="7"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/7.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio (7)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="6"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/6.jpg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Oscuro (6)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Rojos y Cobrizos</span>
-                        <div class="row nowrap slider">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="7.60"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/7-60.jpg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio rojizo intenso (7.60)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="6.66"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/6-66.jpg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio oscuro rojo profundo (6.66)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="7.4"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/7-4.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio cobrizo (7.4)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="6.46"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/6-46.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio oscuro cobre rojizo (6.46)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="5.46"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/5-46.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño claro cobre rojizo (5.46)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Caobas y Violetas</span>
-                        <div class="row nowrap slider main-center">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="5.5"></input>
-                                    <figure>
-                                        <img src="/images/tones/reddish-brown/5-5.jpg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño claro caoba (5.5)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="current-tone-btn" value="5.20"></input>
-                                    <figure>
-                                        <img src="/images/tones/reddish-brown/5-20.jpg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño claro malva intenso (5.20)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
+                        <% }) %>
                     </section>
                 </div>
                 
@@ -296,7 +84,7 @@
                     <section class="question">
                         <p class="content">Elige en la siguiente pantalla el color que más se asemeje a tu color natural. Si tenés canas, deberás indicar el color que se encuentran entre los cabellos grises.</p>
                         <figure class="question-help">
-                            <img src="/images/roots.png" alt="Tonos raíces" />
+                            <img src="/images/roots.webp" alt="Tonos raíces" />
                         </figure>
                     </section>
                 </div>
@@ -306,186 +94,25 @@
                     <!-- ANSWER natural tone -->
                     <input id="naturalTone" type="hidden" name="naturalTone" value="">
                     <section class="question tones">
-                        <span>Negros</span>
-                        <div class="row nowrap slider main-center">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="3"></input>
-                                    <figure>
-                                        <img src="/images/tones/blacks/3.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño Oscuro (3)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
+                        <% Object.keys(naturalTones).forEach(toneFamily => { %>
+                            <span><%= toneFamily %></span>
+                            <div class="row nowrap slider">
+                                <% naturalTones[toneFamily].forEach(tone => { %>
+                                    <div class="col-5 col-md-4 col-lg-3 slide">
+                                        <article class="tone">
+                                            <input type="button" class="natural-tone-btn" value="<%= tone.value %>"></input>
+                                            <figure>
+                                                <img src="/images/tones/<%= tone.img %>" alt="tono natural">
+                                                <figcaption>
+                                                    <i class="icon-check"></i>
+                                                    <span><%= tone.text %>(<%= tone.value %>)</span>
+                                                </figcaption>
+                                            </figure>
+                                        </article>
+                                    </div>
+                                <% }) %>
                             </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="1"></input>
-                                    <figure>
-                                        <img src="/images/tones/blacks/1.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Negro (1)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Marrones</span>
-                        <div class="row nowrap slider">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="7.7"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/7-7.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Marrón (7.7)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="6.7"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/6-7.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Oscuro Marrón (6.7)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="5"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/5.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño Claro (5)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="4"></input>
-                                    <figure>
-                                        <img src="/images/tones/browns/4.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño (4)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Rubios</span>
-                        <div class="row nowrap slider">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="10"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/10.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Extra Claro (10)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="9"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/9.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Muy Claro (9)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="8"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/8.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Claro (8)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="7"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/7.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio (7)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="6"></input>
-                                    <figure>
-                                        <img src="/images/tones/blondes/6.jpg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio Oscuro (6)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
-                        <span>Rojos</span>
-                        <div class="row nowrap slider">
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="7.4"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/7-4.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio cobrizo (7.4)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="6.46"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/6-46.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Rubio oscuro cobre rojizo (6.46)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-5 col-md-4 col-lg-3 slide">
-                                <article class="tone">
-                                    <input type="button" class="natural-tone-btn" value="5.46"></input>
-                                    <figure>
-                                        <img src="/images/tones/reds/5-46.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Castaño claro cobre rojizo (5.46)</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                        </div>
+                        <% }) %>
                     </section>
                 </div>
                 
@@ -496,54 +123,20 @@
                     <input id="desiredTone" type="hidden" name="desiredTone" value="">
                     <section class="question">
                         <div class="row">
-                            <div class="col-6 col-md-3">
-                                <article class="option">
-                                    <input type="button" class="desired-tone-btn" value="light"></input>
-                                    <figure>
-                                        <img src="/images/heart-light.png" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Más claro</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <article class="option">
-                                    <input type="button" class="desired-tone-btn" value="dark"></input>
-                                    <figure>
-                                        <img src="/images/heart-dark.png" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Más oscuro</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <article class="option">
-                                    <input type="button" class="desired-tone-btn" value="equal"></input>
-                                    <figure>
-                                        <img src="/images/heart-current.png" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>Igual</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <article class="option">
-                                    <input type="button" class="desired-tone-btn" value="unknown"></input>
-                                    <figure>
-                                        <img src="/images/heart-color.png" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>No lo sé</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
+                            <% desired.forEach(desiredTone => { %>
+                                <div class="col-6 col-md-3">
+                                    <article class="option">
+                                        <input type="button" class="desired-tone-btn" value="<%= desiredTone.value %>"></input>
+                                        <figure>
+                                            <img src="/images/<%= desiredTone.img %>" alt="tono deseado">
+                                            <figcaption>
+                                                <i class="icon-check"></i>
+                                                <span><%= desiredTone.text %></span>
+                                            </figcaption>
+                                        </figure>
+                                    </article>
+                                </div>
+                            <% }) %>
                         </div>
                     </section>
                 </div>
@@ -555,54 +148,20 @@
                     <input id="greyHair" type="hidden" name="greyHair" value="">
                     <section class="question">
                         <div class="row">
-                            <div class="col-6 col-md-3">
-                                <article class="tone">
-                                    <input type="button" class="grey-hair-btn" value="0"></input>
-                                    <figure>
-                                        <img src="/images/roots/00.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>0% - 10%</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <article class="tone">
-                                    <input type="button" class="grey-hair-btn" value="1"></input>
-                                    <figure>
-                                        <img src="/images/roots/10.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>10% - 60%</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <article class="tone">
-                                    <input type="button" class="grey-hair-btn" value="2"></input>
-                                    <figure>
-                                        <img src="/images/roots/60.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>60% - 90%</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <article class="tone">
-                                    <input type="button" class="grey-hair-btn" value="3"></input>
-                                    <figure>
-                                        <img src="/images/roots/90.jpeg" alt="">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span>90% - 100%</span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
+                            <% greys.forEach(grey => { %>
+                                <div class="col-6 col-md-3">
+                                    <article class="tone">
+                                        <input type="button" class="grey-hair-btn" value="<%= grey.value %>"></input>
+                                        <figure>
+                                            <img src="/images/greys/<%= grey.img %>" alt="porcentaje de canas">
+                                            <figcaption>
+                                                <i class="icon-check"></i>
+                                                <span><%= grey.text %></span>
+                                            </figcaption>
+                                        </figure>
+                                    </article>
+                                </div>
+                            <% }) %>
                         </div>
                     </section>
                 </div>
@@ -614,7 +173,7 @@
                     <input id="reflex" type="hidden" name="reflex" value="">
                     <section class="question tones">
                         <div class="row">
-                            <div id="reflex-tpl" class="col-6 col-md-4 col-lg-3">
+                            <div id="reflex-tpl" class="col-6">
                                 <article class="tone">
                                     <input type="button" class="reflex-btn" value=""></input>
                                     <figure>

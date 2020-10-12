@@ -29,7 +29,29 @@ function isWhiteHair(whiteHair) {
 
 module.exports = {
     index: (req, res) => {
-        res.render('index');
+        let currentTones = data.currentTones.reduce(
+            (groupByCategory, current) => {
+                if(!groupByCategory[current.category])
+                    groupByCategory[current.category] = new Array();
+                groupByCategory[current.category].push(current);
+                return groupByCategory;
+            }, {}
+        );
+
+        let naturalTones = data.naturalTones.reduce(
+            (groupByCategory, current) => {
+                if(!groupByCategory[current.category])
+                    groupByCategory[current.category] = new Array();
+                groupByCategory[current.category].push(current);
+                return groupByCategory;
+            }, {}
+        );
+
+        let desired = data.desired;
+
+        let greys = data.greys;
+
+        res.render('index', { currentTones, naturalTones, desired, greys });
     },
     recommend: (req, res) => {
         res.render('result', { result: req.body });
