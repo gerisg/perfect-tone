@@ -105,7 +105,7 @@ Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
     });
 });
 
-let submitBtns = document.querySelectorAll('button[type="continue"]');
+let submitBtns = document.querySelectorAll('button[type="forward"]');
 submitBtns.forEach(submitBtn => submitBtn.addEventListener('click', function(event){
     // No enviar el form
     event.preventDefault();
