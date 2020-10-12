@@ -60,6 +60,7 @@
     --primary: var(--purple);
     --secondary: var(--rose);
     --light: #F8F8F8;
+    --dark: #333333;
     --white: #FFF;
     --black: #000;
     --light-gray: #CCC;
@@ -239,9 +240,21 @@ main {
 /* FOOTER */
 
 footer { 
-    min-height: 50px;
-    margin: 25px 0;
+    padding: 20px 0;
+    background-color: var(--dark);
 }
+
+footer nav {
+    color: white;
+    text-align: center;
+}
+
+footer nav a {
+    color: white;
+    font-size: .65rem;
+}
+
+
 
 /* HOME */
 
