@@ -33,9 +33,6 @@ function showSlide(n) {
 }
 
 function init() {
-    // Logo Home
-    document.getElementsByTagName('header')[0].classList.add('main');
-    
     // Slide inicial
     showSlide(1);
 
@@ -152,8 +149,6 @@ let forwardBtns = document.querySelectorAll('button[type="forward"]');
 forwardBtns.forEach(forward => forward.addEventListener('click', function(event){
     // No enviar el form
     event.preventDefault();
-    // Mostrar logo normal
-    document.getElementsByTagName('header')[0].classList.remove('main');
     // Qué slide mostrar?
     let current = getLastStepFromPath();
     if(current == 1) {

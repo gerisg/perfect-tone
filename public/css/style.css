@@ -222,17 +222,14 @@ a { text-decoration: none; }
 
 /* HEADER */
 
-header{ 
-    margin-top: 50px;
+header {
+    background-image: url('/images/header.png');
+    background-size: cover;
 }
 
 header figure {
-    width: 90px;
-    margin: 0 auto;
-}
-
-header.main figure {
-    width: 200px;
+    width: 230px;
+    margin: 40px auto;
 }
 
 /* MAIN */
