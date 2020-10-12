@@ -1,3 +1,24 @@
+// Agrego un step al path
+function addStepToPath(step) {
+    let path = localStorage.getItem('path');
+    path = path ? JSON.parse(path) : [];
+    path.push(step);
+    localStorage.setItem('path', JSON.stringify(path));
+}
+
+// Elimino un step del path
+function removeStepFromPath() {
+    var path = JSON.parse(localStorage.getItem('path'));
+    let current = path.pop();
+    localStorage.setItem('path', JSON.stringify(path));
+    return current;
+}
+
+function getLastStepFromPath() {
+    var path = JSON.parse(localStorage.getItem('path'));
+    return path[path.length - 1];
+}
+
 // Mostrar un slide del wizard
 function showSlide(n) {
     console.log('show slide ' + n);
@@ -17,7 +38,7 @@ function init() {
 
     // Limpieza de storage y form
     localStorage.clear();
-    localStorage.setItem('current', 1);
+    addStepToPath(1);
     document.getElementById("prefectTone").reset();
 }
 
@@ -105,16 +126,24 @@ Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
     });
 });
 
-let submitBtns = document.querySelectorAll('button[type="forward"]');
-submitBtns.forEach(submitBtn => submitBtn.addEventListener('click', function(event){
+let backBtns = document.querySelectorAll('button[type="back"]');
+backBtns.forEach(back => back.addEventListener('click', function(event){
+    // No enviar el form
+    event.preventDefault();
+    // Qué slide mostrar?
+    let backStep = removeStepFromPath();
+    console.log('removed', backStep);
+    showSlide(getLastStepFromPath());
+}));
+
+let forwardBtns = document.querySelectorAll('button[type="forward"]');
+forwardBtns.forEach(forward => forward.addEventListener('click', function(event){
     // No enviar el form
     event.preventDefault();
     // Mostrar logo normal
     document.getElementsByTagName('header')[0].classList.remove('main');
     // Qué slide mostrar?
-    let current = parseInt(localStorage.current);
-    // 
-    console.log(current);
+    let current = getLastStepFromPath();
     switch (current) {
         case 3: // Teñido preguntar tono actual (slide 4), sino preguntar tono en raíces (slide 6)
             if(dyedAnswer.value) {
@@ -126,7 +155,7 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener('click', function(eve
                     lightDesiredTone.disabled = true;
                     lightDesiredTone.parentElement.style.opacity = .5;
                 }
-                localStorage.current = next;
+                addStepToPath(next);
                 showSlide(next);
             }
             break;
@@ -159,7 +188,8 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener('click', function(eve
                     }
                 })
                 .catch(error => { console.log(error); });
-            localStorage.current = ++current;
+            current++;
+            addStepToPath(current);
             showSlide(current);
             break;
         case 10:
@@ -167,7 +197,8 @@ submitBtns.forEach(submitBtn => submitBtn.addEventListener('click', function(eve
             localStorage.clear();
             break;
         default:
-            localStorage.current = ++current;
+            current++;
+            addStepToPath(current);
             showSlide(current);
             break;
     }
