@@ -8,15 +8,18 @@ function addStepToPath(step) {
 
 // Elimino un step del path
 function removeStepFromPath() {
+    let current = 1;
     var path = JSON.parse(localStorage.getItem('path'));
-    let current = path.pop();
-    localStorage.setItem('path', JSON.stringify(path));
-    return current;
+    if(path.length > 1) {
+        current = path.pop();
+        localStorage.setItem('path', JSON.stringify(path));
+    }
+    return Number(current);
 }
 
 function getLastStepFromPath() {
     var path = JSON.parse(localStorage.getItem('path'));
-    return path[path.length - 1];
+    return Number(path[path.length - 1]);
 }
 
 // Mostrar un slide del wizard
@@ -36,10 +39,15 @@ function init() {
     // Slide inicial
     showSlide(1);
 
-    // Limpieza de storage y form
+    // Hide back control
+    document.getElementById('back-controls').style.opacity = 0;
+
+    // Limpieza form
+    document.getElementById('prefectTone').reset();
+
+    // Limpieza storage
     localStorage.clear();
     addStepToPath(1);
-    document.getElementById("prefectTone").reset();
 }
 
 init();
@@ -130,10 +138,14 @@ let backBtns = document.querySelectorAll('button[type="back"]');
 backBtns.forEach(back => back.addEventListener('click', function(event){
     // No enviar el form
     event.preventDefault();
+    // Retroceder en el path
+    removeStepFromPath();
     // Qué slide mostrar?
-    let backStep = removeStepFromPath();
-    console.log('removed', backStep);
-    showSlide(getLastStepFromPath());
+    let current = Number(getLastStepFromPath());
+    if(current == 1) {
+        document.getElementById('back-controls').style.opacity = 0;
+    }
+    showSlide(current);
 }));
 
 let forwardBtns = document.querySelectorAll('button[type="forward"]');
@@ -144,6 +156,11 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
     document.getElementsByTagName('header')[0].classList.remove('main');
     // Qué slide mostrar?
     let current = getLastStepFromPath();
+    if(current == 1) {
+        console.log("entré", current);
+        // Hide back control
+        document.getElementById('back-controls').style.opacity = 1;
+    }
     switch (current) {
         case 3: // Teñido preguntar tono actual (slide 4), sino preguntar tono en raíces (slide 6)
             if(dyedAnswer.value) {
