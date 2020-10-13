@@ -110,12 +110,6 @@
     text-align: center;
 }
 
-.option-inside {
-    font-family: 'Work Sans';
-    font-weight: 800;
-    font-size: 2.5rem;
-}
-
 .icon-check:before { content: '\e800'; }
 .icon-right:before { content: '\e801'; }
 .icon-left:before { content: '\e802'; }
@@ -142,9 +136,7 @@ img { width: 100%; }
 
 a { text-decoration: none; }
 
-.question .question-name,
-.tone figure img,
-.square-radio {
+.border-shadow {
     border: 5px solid var(--black);
     -moz-box-shadow: 5px 5px var(--black);
     -webkit-box-shadow: 5px 5px var(--black);
@@ -193,7 +185,7 @@ a { text-decoration: none; }
 
 .controls {
     margin-top: 30px;
-    border-top: 2px solid var(--dark);
+    border-top: 2px solid var(--dark-gray);
 }
 
 .btn-group { 
@@ -255,8 +247,6 @@ footer nav a {
     font-size: .65rem;
 }
 
-
-
 /* HOME */
 
 .home .title {
@@ -282,11 +272,10 @@ footer nav a {
 
 .question-wrapper { display: none; }
 
-.question { text-align: center; }
-
 .question-title { margin: 1.5rem 0; }
 
-.question-name {
+.question input[type=text],
+.question input[type=email] {
     width: 100%;
     padding: .75rem 1rem;
     margin: 1.5rem 0;
@@ -295,36 +284,38 @@ footer nav a {
 
 .question-help {
     width: 80%;
-    margin: 50px auto 0;
+    margin: 25px auto 0;
 }
 
 .question-photo {
     width: 130px;
 }
 
-.question.yes-no, .question.tones {
+.question.light-bg {
     background-color: var(--light);
-    padding: 50px 0;
+    padding: 25px 10px;
+}
+
+.question>span {
+    font-family: 'Work Sans';
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: capitalize;
 }
 
 /* YES-NO SQUARES */
 
 .square-radio {
+    background-color: var(--white);
+    color: var(--black);
+    font-family: 'Work Sans';
+    font-weight: 800;
+    font-size: 2.5rem;
     width: 125px;
     height: 125px;
+    margin: 1rem;
     overflow:auto;
     float:left;
-    margin: 1rem;
-}
-
-.square-radio.yes {
-    color: var(--white);
-    background-color: var(--pink);
-}
-
-.square-radio.no {
-    color: var(--purple);
-    background-color: var(--white);
 }
 
 .square-radio:hover,
@@ -332,10 +323,14 @@ footer nav a {
     box-shadow: none;
 }
 
+.square-radio.selected {
+    background-color: var(--pink);
+}
+
 .square-radio label {
     text-transform: uppercase;
     text-align:center;
-    padding: 34px;
+    padding: 34px 0;
     display:block;
 }
 
@@ -372,12 +367,22 @@ footer nav a {
 .tone figure figcaption,
 .option figure figcaption {
     width: 100%;
-    margin: 1rem 0;
-    font-weight: 700;
     height: 36px;
+    margin: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.tone figure figcaption span {
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.option figure figcaption span {
+    font-family: 'Work Sans';
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .current-tone-btn,
@@ -395,16 +400,23 @@ footer nav a {
     height: 100%;
 }
 
-.current-tone-btn.selected + figure i,
-.natural-tone-btn.selected + figure i,
-.desired-tone-btn.selected + figure i,
-.grey-hair-btn.selected + figure i,
+.current-tone-btn.selected,
+.natural-tone-btn.selected,
+.desired-tone-btn.selected,
+.grey-hair-btn.selected {
+    background-image: url('/images/check.png');
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 65%;
+}
+
 .reflex-btn.selected + figure i {
     display: inline-block;
     font-size: 1.5rem;
 }
 
-.tone i, .option i, #reflex-tpl { display: none; }
+#reflex-tpl { display: none; }
 
 /** TABLET **/
 @media (min-width: 576px) {

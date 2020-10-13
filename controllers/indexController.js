@@ -48,7 +48,6 @@ module.exports = {
         );
 
         let desired = data.desired;
-
         let greys = data.greys;
 
         res.render('index', { currentTones, naturalTones, desired, greys });

@@ -22,7 +22,10 @@
                     <p class="question-title">Empecemos con lo más importante, ¿cómo te llamás?</p>
                     <section class="question">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Nombre" class="question-name">
+                            <input type="text" id="name" name="name" placeholder="Nombre" class="border-shadow">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Correo Electrónico" class="border-shadow">
                         </div>
                     </section>
                 </div>
@@ -31,12 +34,12 @@
                     <p class="question-title">¿Tenés el cabello teñido?</p>
                     <!-- ANSWER dyed hair -->
                     <input id="dyedAnswer" type="hidden" name="dyedAnswer" value="">
-                    <section class="question yes-no">
+                    <section class="question light-bg">
                         <div class="row main-center">
-                            <div class="col-12 col-md-3 square-radio yes option-inside">
+                            <div class="col-12 col-md-3 square-radio yes border-shadow">
                                 <label>si<input type="radio" value="yes"></label>
                             </div>
-                            <div class="col-12 col-md-3 square-radio no option-inside">
+                            <div class="col-12 col-md-3 square-radio no border-shadow">
                                 <label>no<input type="radio" value="no"></label>
                             </div>
                         </div>
@@ -57,7 +60,7 @@
                     <p class="question-title">¿Cuál es el tono de color que usás actualmente?</p>
                     <!-- ANSWER current tone -->
                     <input id="currentTone" type="hidden" name="currentTone" value="">
-                    <section class="question tones">
+                    <section class="question light-bg">
                         <% Object.keys(currentTones).forEach(toneFamily => { %>
                             <span><%= toneFamily %></span>
                             <div class="row nowrap slider">
@@ -66,10 +69,9 @@
                                         <article class="tone">
                                             <input type="button" class="current-tone-btn" value="<%= tone.value %>"></input>
                                             <figure>
-                                                <img src="/images/tones/<%= tone.img %>" alt="tono actual">
+                                                <img class="border-shadow" src="/images/tones/<%= tone.img %>" alt="tono actual">
                                                 <figcaption>
-                                                    <i class="icon-check"></i>
-                                                    <span><%= tone.text %>(<%= tone.value %>)</span>
+                                                    <span><%= tone.text %> (<%= tone.value %>)</span>
                                                 </figcaption>
                                             </figure>
                                         </article>
@@ -93,7 +95,7 @@
                     <p class="question-title">¿Cuál es tu tono de color natural en las raíces?</p>
                     <!-- ANSWER natural tone -->
                     <input id="naturalTone" type="hidden" name="naturalTone" value="">
-                    <section class="question tones">
+                    <section class="question light-bg">
                         <% Object.keys(naturalTones).forEach(toneFamily => { %>
                             <span><%= toneFamily %></span>
                             <div class="row nowrap slider">
@@ -102,10 +104,9 @@
                                         <article class="tone">
                                             <input type="button" class="natural-tone-btn" value="<%= tone.value %>"></input>
                                             <figure>
-                                                <img src="/images/tones/<%= tone.img %>" alt="tono natural">
+                                                <img class="border-shadow" src="/images/tones/<%= tone.img %>" alt="tono natural">
                                                 <figcaption>
-                                                    <i class="icon-check"></i>
-                                                    <span><%= tone.text %>(<%= tone.value %>)</span>
+                                                    <span><%= tone.text %> (<%= tone.value %>)</span>
                                                 </figcaption>
                                             </figure>
                                         </article>
@@ -130,7 +131,6 @@
                                         <figure>
                                             <img src="/images/<%= desiredTone.img %>" alt="tono deseado">
                                             <figcaption>
-                                                <i class="icon-check"></i>
                                                 <span><%= desiredTone.text %></span>
                                             </figcaption>
                                         </figure>
@@ -146,16 +146,15 @@
                     <p class="content">Si no podés decidir entre dos valores, seleccionar el más alto para alcanzar mejores resultados.</p>
                     <!-- ANSWER grey hairs -->
                     <input id="greyHair" type="hidden" name="greyHair" value="">
-                    <section class="question">
+                    <section class="question light-bg">
                         <div class="row">
                             <% greys.forEach(grey => { %>
                                 <div class="col-6 col-md-3">
-                                    <article class="tone">
+                                    <article class="option">
                                         <input type="button" class="grey-hair-btn" value="<%= grey.value %>"></input>
                                         <figure>
-                                            <img src="/images/greys/<%= grey.img %>" alt="porcentaje de canas">
+                                            <img class="border-shadow" src="/images/greys/<%= grey.img %>" alt="porcentaje de canas">
                                             <figcaption>
-                                                <i class="icon-check"></i>
                                                 <span><%= grey.text %></span>
                                             </figcaption>
                                         </figure>
@@ -171,7 +170,7 @@
                     <p class="content">El color del cabello se percibe de manera multidimensional, ya que no es plano.</p>
                     <!-- ANSWER reflex -->
                     <input id="reflex" type="hidden" name="reflex" value="">
-                    <section class="question tones">
+                    <section class="question light-bg">
                         <div class="row">
                             <div id="reflex-tpl" class="col-6">
                                 <article class="tone">
