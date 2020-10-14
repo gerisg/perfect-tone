@@ -1,3 +1,4 @@
+const mailer = require('../tools/mailer');
 const data = require('../database/data');
 const db = require('../database/jsonTable');
 
@@ -31,7 +32,10 @@ function isWhiteHair(whiteHair) {
 }
 
 module.exports = {
+
     index: (req, res) => {
+
+        // Group currentTones by family
         let currentTones = data.currentTones.reduce(
             (groupByCategory, current) => {
                 if(!groupByCategory[current.category])
@@ -41,6 +45,7 @@ module.exports = {
             }, {}
         );
 
+        // Group naturalTones by family
         let naturalTones = data.naturalTones.reduce(
             (groupByCategory, current) => {
                 if(!groupByCategory[current.category])
@@ -50,13 +55,14 @@ module.exports = {
             }, {}
         );
 
+        // Get desired and greys scale values
         let desired = data.desired;
         let greys = data.greys;
 
         res.render('index', { currentTones, naturalTones, desired, greys });
     },
+
     save: (req, res) => {
-        // TODO Enviar email al usuario con el resultado / link a la tienda
         let record = {
             name: req.body.name,
             email: req.body.email,
@@ -65,9 +71,20 @@ module.exports = {
             naturalTone: req.body.naturalTone,
             desiredTone: req.body.desiredTone,
             greys: req.body.greyHair,
-            reflex: req.body.reflex
+            reflex: req.body.reflex,
+            suggested: req.body.suggested
         }
+        
+        // Save wizard data
         model.create(record);
-        res.send('success');
+        
+        // Send suggestion by email
+        mailer.sendPerfectTone(record.email, record.suggested);
+
+        res.json({ message: 'success' });
+    },
+
+    rules: (req, res) => {
+        res.render('rules');
     }
 }
