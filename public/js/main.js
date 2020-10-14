@@ -1,3 +1,18 @@
+// Enviar datos por POST
+async function postData(url = '', data = {}) {
+    const response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
 // Agrego un step al path
 function addStepToPath(step) {
     let path = localStorage.getItem('path');
@@ -17,12 +32,13 @@ function removeStepFromPath() {
     return Number(current);
 }
 
+// Obtener el step actual
 function getLastStepFromPath() {
     var path = JSON.parse(localStorage.getItem('path'));
     return Number(path[path.length - 1]);
 }
 
-// Mostrar un slide del wizard
+// Mostrar el slide del wizard que se recibe por parámetro
 function showSlide(n) {
     console.log('show slide ' + n);
     let slides = document.getElementsByClassName('question-wrapper');
@@ -39,16 +55,14 @@ function showSlide(n) {
     }, 100);
 }
 
+// Limpieza al inicio
 function init(step) {
     // Slide inicial
     showSlide(step);
-
     // Hide back control
     document.getElementById('back-controls').style.opacity = 0;
-
     // Limpieza form
-    document.getElementById('prefectTone').reset();
-
+    document.getElementById('perfectTone').reset();
     // Limpieza storage
     localStorage.clear();
     addStepToPath(step);
@@ -56,192 +70,168 @@ function init(step) {
 
 init(1);
 
-// Enviar datos por POST
-async function postData(url = '', data = {}) {
-    const response = await fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(data)
+
+window.addEventListener('load', function () {
+
+    // Inputs donde guardo las respuestas
+    let dyedAnswer = document.getElementById("dyedAnswer");
+    let currentToneAnswer = document.getElementById("currentTone");
+    let naturalToneAnswer = document.getElementById("naturalTone");
+    let desiredToneAnswer = document.getElementById("desiredTone");
+    let greyHairAnswer = document.getElementById("greyHair");
+    let reflexAnswer = document.getElementById("reflex");
+
+    // Agrega class selected a input radio y persiste valor en element
+    let dyedOptions = dyedAnswer.parentNode.querySelectorAll('input[type="radio"]');
+    Array.prototype.find.call(dyedOptions, dyedOption => {
+        dyedOption.addEventListener('click', function(e){
+            Array.prototype.forEach.call(dyedOptions, dyedOption => dyedOption.parentNode.parentNode.classList.remove('selected'));
+            this.parentNode.parentNode.classList.add("selected");
+            // Guardo la respuesta que se envia en el Form
+            dyedAnswer.value = this.value;
+        });
     });
-    return response.json();
-}
 
-// Reflejo
-let reflexAnswer = document.getElementById("reflex");
-
-// Teñido
-let dyedAnswer = document.getElementById("dyedAnswer");
-let dyedOptions = dyedAnswer.parentNode.querySelectorAll('input[type="radio"]');
-Array.prototype.find.call(dyedOptions, dyedOption => {
-    dyedOption.addEventListener('click', function(e){
-        Array.prototype.forEach.call(dyedOptions, dyedOption => dyedOption.parentNode.parentNode.classList.remove('selected'));
-        this.parentNode.parentNode.classList.add("selected");
-        // Guardo la respuesta que se envia en el Form
-        dyedAnswer.value = this.value;
-    });
-});
-
-// Color de pelo teñido
-let currentToneAnswer = document.getElementById("currentTone");
-let currentToneBtns = document.getElementsByClassName("current");
-Array.prototype.forEach.call(currentToneBtns, currentToneBtn => {
-    currentToneBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        Array.prototype.forEach.call(currentToneBtns, ct => ct.classList.remove('selected'));
-        this.classList.add("selected");
-        // Guardo la respuesta que se envia en el Form
-        currentToneAnswer.value = this.value;
-    });
-});
-
-// Color de pelo natural
-let naturalToneAnswer = document.getElementById("naturalTone");
-let naturalToneBtns = document.getElementsByClassName("natural");
-Array.prototype.forEach.call(naturalToneBtns, naturalToneBtn => {
-    naturalToneBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        Array.prototype.forEach.call(naturalToneBtns, nt => nt.classList.remove('selected'));
-        this.classList.add("selected");
-        // Guardo la respuesta que se envia en el Form
-        naturalToneAnswer.value = this.value;
-    });
-});
-
-// Tono deseado
-let desiredToneAnswer = document.getElementById("desiredTone");
-let desiredToneBtns = document.getElementsByClassName("desired");
-Array.prototype.forEach.call(desiredToneBtns, desiredToneBtn => {
-    desiredToneBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        Array.prototype.forEach.call(desiredToneBtns, dt => dt.classList.remove('selected'));
-        this.classList.add("selected");
-        // Guardo la respuesta que se envia en el Form
-        desiredToneAnswer.value = this.value;
-    });
-});
-
-// Canas
-let greyHairAnswer = document.getElementById("greyHair");
-let greyHairBtns = document.getElementsByClassName("grey-hair");
-Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
-    greyHairBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        Array.prototype.forEach.call(greyHairBtns, gh => gh.classList.remove('selected'));
-        this.classList.add("selected");
-        // Guardo la respuesta que se envia en el Form
-        greyHairAnswer.value = this.value;
-    });
-});
-
-// Retroceder
-let backBtns = document.querySelectorAll('button[type="back"]');
-backBtns.forEach(back => back.addEventListener('click', function(event){
-    // No enviar el form
-    event.preventDefault();
-    // Retroceder en el path
-    removeStepFromPath();
-    // Qué slide mostrar?
-    let current = Number(getLastStepFromPath());
-    if(current == 1) {
-        document.getElementById('back-controls').style.opacity = 0;
+    // Agrega class selected a buttons y persiste valor en element
+    function addSelectedEvent(className, element) {
+        let btns = document.getElementsByClassName(className);
+        Array.prototype.forEach.call(btns, btn => {
+            btn.addEventListener('click', function(e){
+                e.preventDefault();
+                Array.prototype.forEach.call(btns, btn => btn.classList.remove('selected'));
+                this.classList.add("selected");
+                // Guardo la respuesta que se envia en el Form
+                element.value = this.value;
+            });
+        });
     }
-    showSlide(current);
-}));
 
-// Avanzar
-let forwardBtns = document.querySelectorAll('button[type="forward"]');
-forwardBtns.forEach(forward => forward.addEventListener('click', function(event){
-    // No enviar el form
-    event.preventDefault();
-    // Qué slide mostrar?
-    let current = getLastStepFromPath();
-    if(current == 1) {
-        // Hide back control
-        document.getElementById('back-controls').style.opacity = 1;
-    }
-    switch (current) {
-        case 3: // Teñido preguntar tono actual (slide 4), sino preguntar tono en raíces (slide 6)
-            if(dyedAnswer.value) {
-                let next = 6;
-                if(dyedAnswer.value == 'yes') {
-                    next = 4;
-                    // Si tiene teñido no puede aclarar
-                    let lightDesiredTone = desiredToneBtns[0];
-                    lightDesiredTone.disabled = true;
-                    lightDesiredTone.parentElement.style.opacity = .5;
+    // Agregar evento seleccionar y guardar valor en input hidden
+    addSelectedEvent("current", currentToneAnswer);
+    addSelectedEvent("natural", naturalToneAnswer);
+    addSelectedEvent("desired", desiredToneAnswer);
+    addSelectedEvent("grey-hair", greyHairAnswer);
+
+    // Retroceder
+    let backBtns = document.querySelectorAll('button[type="back"]');
+    backBtns.forEach(back => back.addEventListener('click', function(event){
+        // No enviar el form
+        event.preventDefault();
+        // Retroceder en el path
+        removeStepFromPath();
+        // Qué slide mostrar?
+        let current = Number(getLastStepFromPath());
+        if(current == 1) { document.getElementById('back-controls').style.opacity = 0; }
+        showSlide(current);
+    }));
+
+    // Avanzar
+    let forwardBtns = document.querySelectorAll('button[type="forward"]');
+    forwardBtns.forEach(forward => forward.addEventListener('click', function(event){
+        // No enviar el form
+        event.preventDefault();
+        // Qué slide mostrar?
+        let current = getLastStepFromPath();
+        if(current == 1) { document.getElementById('back-controls').style.opacity = 1; }
+        switch (current) {
+            case 3: // Teñido preguntar tono actual (slide 4), sino preguntar tono en raíces (slide 6)
+                if(dyedAnswer.value) {
+                    let next = 6;
+                    if(dyedAnswer.value == 'yes') {
+                        next = 4;
+                        // Si tiene teñido no puede aclarar. La primera opción es aclarar.
+                        let lightDesiredTone = document.getElementsByClassName('desired')[0];
+                        lightDesiredTone.disabled = true;
+                        lightDesiredTone.parentElement.style.opacity = .5;
+                    }
+                    addStepToPath(next);
+                    showSlide(next);
                 }
-                addStepToPath(next);
-                showSlide(next);
-            }
-            break;
-        case 9: // Reflejos requiere data del BE
-            postData(window.location.href + 'api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
-                .then(data => { 
-                    // TODO Check zero results
-                    let reflexes = data.reflexes;
-                    
-                    // Limpiar reflejos existentes
-                    let rootReflex = document.getElementById('reflex-root');
-                    while (rootReflex.firstChild) {
-                        rootReflex.removeChild(rootReflex.firstChild);
-                    }
+                break;
+            case 9: // Reflejos requiere data del BE
+                postData(window.location.href + 'api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
+                    .then(data => { 
+                        // TODO Check zero results
+                        let reflexes = data.reflexes;
+                        
+                        // Limpiar reflejos existentes
+                        let rootReflex = document.getElementById('reflex-root');
+                        while (rootReflex.firstChild) {
+                            rootReflex.removeChild(rootReflex.firstChild);
+                        }
 
-                    // Armar HTML de reflejos clonando un DIV que uso como template
-                    let reflexTemplate = document.getElementById('reflex-tpl');
-                    for (let i = 0; i < reflexes.length; i++) {
-                        const reflex = reflexes[i];
-                        reflex.products.forEach(reflexProd => {
-                            let reflexNode = reflexTemplate.cloneNode(true);
-                            reflexNode.setAttribute('id', 'reflex-' + i);
-                            reflexNode.childNodes[1].childNodes[1].value = reflexProd.id;
-                            reflexNode.childNodes[1].childNodes[3].childNodes[1].src = `/images/reflex/${reflexProd.img}`;
-                            reflexNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].innerHTML = `${reflex.text}`;
-                            // En cada click muesto un check y guardo la respuesta
-                            reflexNode.childNodes[1].childNodes[1].addEventListener('click', function(e){
-                                e.preventDefault();
-                                let reflexesBtns = document.getElementsByClassName('reflex-btn');
-                                Array.prototype.forEach.call(reflexesBtns, rb => rb.classList.remove('selected'));
-                                this.classList.add('selected');
-                                // Guardo la respuesta que se envia en el Form
-                                reflexAnswer.dataset.wc = 'https://cobeauty.store/product/' + reflexProd.wc;
-                                reflexAnswer.value = this.value;
+                        // Armar HTML de reflejos clonando un DIV que uso como template
+                        let reflexTemplate = document.getElementById('reflex-tpl');
+                        for (let i = 0; i < reflexes.length; i++) {
+                            const reflex = reflexes[i];
+                            reflex.products.forEach(reflexProd => {
+                                let reflexNode = reflexTemplate.cloneNode(true);
+                                reflexNode.setAttribute('id', 'reflex-' + i);
+                                reflexNode.childNodes[1].childNodes[1].value = reflexProd.id;
+                                reflexNode.childNodes[1].childNodes[3].childNodes[1].src = `/images/reflex/${reflexProd.img}`;
+                                reflexNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].innerHTML = `${reflex.text}`;
+                                // En cada click muesto un check y guardo la respuesta
+                                reflexNode.childNodes[1].childNodes[1].addEventListener('click', function(e){
+                                    e.preventDefault();
+                                    let reflexesBtns = document.getElementsByClassName('reflex-btn');
+                                    Array.prototype.forEach.call(reflexesBtns, rb => rb.classList.remove('selected'));
+                                    this.classList.add('selected');
+                                    // Guardo la respuesta que se envia en el Form
+                                    reflexAnswer.dataset.wc = 'https://cobeauty.store/product/' + reflexProd.wc;
+                                    reflexAnswer.value = this.value;
+                                });
+                                reflexTemplate.nextElementSibling.insertBefore(reflexNode, null);
                             });
-                            reflexTemplate.nextElementSibling.insertBefore(reflexNode, null);
-                        });
-                    }
+                        }
+                    })
+                    .catch(error => { console.log(error); });
+                current++;
+                addStepToPath(current);
+                showSlide(current);
+                break;
+            case 10: // Último paso del wizard
+                // Get form
+                const form = document.getElementById('perfectTone');
+                // Eliminar controles
+                let controls = document.getElementsByClassName('controls')[0];
+                controls.parentElement.removeChild(controls);    
+                // Mostrar nombre usuario
+                let name = form.name.value;
+                let lastStep = document.getElementById('slide-11');
+                lastStep.childNodes[1].innerText = name;
+                // Mostrar el botón luego de tres segundos
+                setTimeout(function(){
+                    var a = document.createElement('a');
+                    var link = document.createTextNode('Conocé tu resultado');
+                    a.appendChild(link);
+                    a.href = reflexAnswer.dataset.wc;
+                    a.classList.add('btn-woocom', 'border-shadow');
+                    lastStep.appendChild(a);
+                }, 3000);
+                // Continue to next step
+                current++;
+                addStepToPath(current);
+                showSlide(current);
+                // Save
+                postData(window.location.href, { 
+                    name: form.name.value,
+                    email: form.email.value,
+                    dyed: form.dyedAnswer.value,
+                    currentTone: form.currentTone.value,
+                    naturalTone: form.naturalTone.value,
+                    desiredTone: form.desiredTone.value,
+                    greyHair: form.greyHair.value,
+                    reflex: form.reflex.value,
+                    suggested: form.reflex.dataset.wc
                 })
+                .then(data => { console.log(data); })
                 .catch(error => { console.log(error); });
-            current++;
-            addStepToPath(current);
-            showSlide(current);
-            break;
-        case 10:
-            // Eliminar controles
-            let controls = document.getElementsByClassName('controls')[0];
-            controls.parentElement.removeChild(controls);    
-            // Mostrar nombre usuario
-            let name = document.getElementById('prefectTone').name.value;
-            let lastStep = document.getElementById('slide-11');
-            lastStep.childNodes[1].innerText = name;
-            // Mostrar el botón luego de tres segundos
-            setTimeout(function(){
-                var a = document.createElement('a');
-                var link = document.createTextNode('Conocé tu resultado');
-                a.appendChild(link);
-                a.href = reflexAnswer.dataset.wc;
-                a.classList.add('btn-woocom', 'border-shadow');
-                lastStep.appendChild(a);
-            }, 3000);
-            // Continue to next step
-        default:
-            current++;
-            addStepToPath(current);
-            showSlide(current);
-            break;
-    }
-}));
+                break;
+            default:
+                current++;
+                addStepToPath(current);
+                showSlide(current);
+                break;
+        }
+    }));
+});
