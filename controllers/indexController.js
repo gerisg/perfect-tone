@@ -1,4 +1,7 @@
 const data = require('../database/data');
+const db = require('../database/jsonTable');
+
+const model = db('records');
 
 function getSuggestion(tonesSelected, reflexId, isRedBased, isWhiteHair) {
     let reflexSelected = data.families.find(item => item.id == reflexId);
@@ -52,7 +55,19 @@ module.exports = {
 
         res.render('index', { currentTones, naturalTones, desired, greys });
     },
-    recommend: (req, res) => {
-        res.render('result', { result: req.body });
+    save: (req, res) => {
+        // TODO Enviar email al usuario con el resultado / link a la tienda
+        let record = {
+            name: req.body.name,
+            email: req.body.email,
+            dyed: req.body.dyed,
+            currentTone: req.body.currentTone,
+            naturalTone: req.body.naturalTone,
+            desiredTone: req.body.desiredTone,
+            greys: req.body.greyHair,
+            reflex: req.body.reflex
+        }
+        model.create(record);
+        res.send('success');
     }
 }
