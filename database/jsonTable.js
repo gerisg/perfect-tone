@@ -10,7 +10,7 @@ let model = function(tableName) {
             return fileContent ? JSON.parse(fileContent) : [];
         },
         writeFile(contents) {
-            fs.writeFileSync(this.filePath, JSON.stringify(contents, null, " "));
+            fs.writeFileSync(this.filePath, JSON.stringify(contents)); // , null, " "));
         },
         nextId() {
             let rows = this.readFile();

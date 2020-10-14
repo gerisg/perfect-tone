@@ -4,5 +4,6 @@ var controller = require('../controllers/indexController');
 
 router.post('/', controller.save);
 router.get('/', controller.index);
+router.get('/rules', controller.rules);
 
 module.exports = router;
