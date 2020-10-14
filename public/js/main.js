@@ -27,14 +27,21 @@ function showSlide(n) {
     console.log('show slide ' + n);
     let slides = document.getElementsByClassName('question-wrapper');
     let current = n > slides.length || n < 1 ? 1 : n;
-    for (let i = 0; i < slides.length; i++)
+    for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = 'none';
+        slides[i].style.visibility = 'hidden';
+        slides[i].style.opacity = 0;
+    }
     slides[current-1].style.display = 'block';
+    setTimeout(function(){
+        slides[current-1].style.visibility = 'visible';
+        slides[current-1].style.opacity = 1;
+    }, 100);
 }
 
-function init() {
+function init(step) {
     // Slide inicial
-    showSlide(1);
+    showSlide(step);
 
     // Hide back control
     document.getElementById('back-controls').style.opacity = 0;
@@ -44,10 +51,10 @@ function init() {
 
     // Limpieza storage
     localStorage.clear();
-    addStepToPath(1);
+    addStepToPath(step);
 }
 
-init();
+init(1);
 
 // Enviar datos por POST
 async function postData(url = '', data = {}) {
@@ -81,7 +88,7 @@ Array.prototype.find.call(dyedOptions, dyedOption => {
 
 // Color de pelo teñido
 let currentToneAnswer = document.getElementById("currentTone");
-let currentToneBtns = document.getElementsByClassName("current-tone-btn");
+let currentToneBtns = document.getElementsByClassName("current");
 Array.prototype.forEach.call(currentToneBtns, currentToneBtn => {
     currentToneBtn.addEventListener('click', function(e){
         e.preventDefault();
@@ -94,7 +101,7 @@ Array.prototype.forEach.call(currentToneBtns, currentToneBtn => {
 
 // Color de pelo natural
 let naturalToneAnswer = document.getElementById("naturalTone");
-let naturalToneBtns = document.getElementsByClassName("natural-tone-btn");
+let naturalToneBtns = document.getElementsByClassName("natural");
 Array.prototype.forEach.call(naturalToneBtns, naturalToneBtn => {
     naturalToneBtn.addEventListener('click', function(e){
         e.preventDefault();
@@ -107,7 +114,7 @@ Array.prototype.forEach.call(naturalToneBtns, naturalToneBtn => {
 
 // Tono deseado
 let desiredToneAnswer = document.getElementById("desiredTone");
-let desiredToneBtns = document.getElementsByClassName("desired-tone-btn");
+let desiredToneBtns = document.getElementsByClassName("desired");
 Array.prototype.forEach.call(desiredToneBtns, desiredToneBtn => {
     desiredToneBtn.addEventListener('click', function(e){
         e.preventDefault();
@@ -120,7 +127,7 @@ Array.prototype.forEach.call(desiredToneBtns, desiredToneBtn => {
 
 // Canas
 let greyHairAnswer = document.getElementById("greyHair");
-let greyHairBtns = document.getElementsByClassName("grey-hair-btn");
+let greyHairBtns = document.getElementsByClassName("grey-hair");
 Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
     greyHairBtn.addEventListener('click', function(e){
         e.preventDefault();
@@ -131,6 +138,7 @@ Array.prototype.forEach.call(greyHairBtns, greyHairBtn => {
     });
 });
 
+// Retroceder
 let backBtns = document.querySelectorAll('button[type="back"]');
 backBtns.forEach(back => back.addEventListener('click', function(event){
     // No enviar el form
@@ -145,6 +153,7 @@ backBtns.forEach(back => back.addEventListener('click', function(event){
     showSlide(current);
 }));
 
+// Avanzar
 let forwardBtns = document.querySelectorAll('button[type="forward"]');
 forwardBtns.forEach(forward => forward.addEventListener('click', function(event){
     // No enviar el form
@@ -152,7 +161,6 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
     // Qué slide mostrar?
     let current = getLastStepFromPath();
     if(current == 1) {
-        console.log("entré", current);
         // Hide back control
         document.getElementById('back-controls').style.opacity = 1;
     }
@@ -163,7 +171,7 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                 if(dyedAnswer.value == 'yes') {
                     next = 4;
                     // Si tiene teñido no puede aclarar
-                    let lightDesiredTone = document.getElementsByClassName('desired-tone-btn')[0];
+                    let lightDesiredTone = desiredToneBtns[0];
                     lightDesiredTone.disabled = true;
                     lightDesiredTone.parentElement.style.opacity = .5;
                 }
@@ -172,12 +180,19 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
             }
             break;
         case 9: // Reflejos requiere data del BE
-            postData('https://quiz.cobeauty.store/api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
+            postData(window.location.href + 'api/reflexes', { current: currentToneAnswer.value, natural: naturalToneAnswer.value, desired: desiredToneAnswer.value, greys: greyHairAnswer.value })
                 .then(data => { 
-                    let reflexTemplate = document.getElementById('reflex-tpl');
+                    // TODO Check zero results
                     let reflexes = data.reflexes;
-                    console.log('Tono sugerido: ' + data.tones[0]);
+                    
+                    // Limpiar reflejos existentes
+                    let rootReflex = document.getElementById('reflex-root');
+                    while (rootReflex.firstChild) {
+                        rootReflex.removeChild(rootReflex.firstChild);
+                    }
+
                     // Armar HTML de reflejos clonando un DIV que uso como template
+                    let reflexTemplate = document.getElementById('reflex-tpl');
                     for (let i = 0; i < reflexes.length; i++) {
                         const reflex = reflexes[i];
                         reflex.products.forEach(reflexProd => {
@@ -185,17 +200,18 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                             reflexNode.setAttribute('id', 'reflex-' + i);
                             reflexNode.childNodes[1].childNodes[1].value = reflexProd.id;
                             reflexNode.childNodes[1].childNodes[3].childNodes[1].src = `/images/reflex/${reflexProd.img}`;
-                            reflexNode.childNodes[1].childNodes[3].childNodes[3].childNodes[3].innerHTML = `${reflex.text} (${reflexProd.id})`;
+                            reflexNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].innerHTML = `${reflex.text}`;
                             // En cada click muesto un check y guardo la respuesta
                             reflexNode.childNodes[1].childNodes[1].addEventListener('click', function(e){
                                 e.preventDefault();
-                                let reflexesBtns = document.getElementsByClassName("reflex-btn");
+                                let reflexesBtns = document.getElementsByClassName('reflex-btn');
                                 Array.prototype.forEach.call(reflexesBtns, rb => rb.classList.remove('selected'));
-                                this.classList.add("selected");
+                                this.classList.add('selected');
                                 // Guardo la respuesta que se envia en el Form
+                                reflexAnswer.dataset.wc = 'https://cobeauty.store/product/' + reflexProd.wc;
                                 reflexAnswer.value = this.value;
                             });
-                            reflexTemplate.parentNode.insertBefore(reflexNode, null);
+                            reflexTemplate.nextElementSibling.insertBefore(reflexNode, null);
                         });
                     }
                 })
@@ -205,9 +221,23 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
             showSlide(current);
             break;
         case 10:
-            document.getElementById("prefectTone").submit();
-            localStorage.clear();
-            break;
+            // Eliminar controles
+            let controls = document.getElementsByClassName('controls')[0];
+            controls.parentElement.removeChild(controls);    
+            // Mostrar nombre usuario
+            let name = document.getElementById('prefectTone').name.value;
+            let lastStep = document.getElementById('slide-11');
+            lastStep.childNodes[1].innerText = name;
+            // Mostrar el botón luego de tres segundos
+            setTimeout(function(){
+                var a = document.createElement('a');
+                var link = document.createTextNode('Conocé tu resultado');
+                a.appendChild(link);
+                a.href = reflexAnswer.dataset.wc;
+                a.classList.add('btn-woocom', 'border-shadow');
+                lastStep.appendChild(a);
+            }, 3000);
+            // Continue to next step
         default:
             current++;
             addStepToPath(current);

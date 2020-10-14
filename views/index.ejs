@@ -67,7 +67,7 @@
                                 <% currentTones[toneFamily].forEach(tone => { %>
                                     <div class="col-5 col-md-4 col-lg-3 slide">
                                         <article class="tone">
-                                            <input type="button" class="current-tone-btn" value="<%= tone.value %>"></input>
+                                            <input type="button" class="current answer-btn" value="<%= tone.value %>"></input>
                                             <figure>
                                                 <img class="border-shadow" src="/images/tones/<%= tone.img %>" alt="tono actual">
                                                 <figcaption>
@@ -102,7 +102,7 @@
                                 <% naturalTones[toneFamily].forEach(tone => { %>
                                     <div class="col-5 col-md-4 col-lg-3 slide">
                                         <article class="tone">
-                                            <input type="button" class="natural-tone-btn" value="<%= tone.value %>"></input>
+                                            <input type="button" class="natural answer-btn" value="<%= tone.value %>"></input>
                                             <figure>
                                                 <img class="border-shadow" src="/images/tones/<%= tone.img %>" alt="tono natural">
                                                 <figcaption>
@@ -127,7 +127,7 @@
                             <% desired.forEach(desiredTone => { %>
                                 <div class="col-6 col-md-3">
                                     <article class="option">
-                                        <input type="button" class="desired-tone-btn" value="<%= desiredTone.value %>"></input>
+                                        <input type="button" class="desired answer-btn" value="<%= desiredTone.value %>"></input>
                                         <figure>
                                             <img src="/images/<%= desiredTone.img %>" alt="tono deseado">
                                             <figcaption>
@@ -151,7 +151,7 @@
                             <% greys.forEach(grey => { %>
                                 <div class="col-6 col-md-3">
                                     <article class="option">
-                                        <input type="button" class="grey-hair-btn" value="<%= grey.value %>"></input>
+                                        <input type="button" class="grey-hair answer-btn" value="<%= grey.value %>"></input>
                                         <figure>
                                             <img class="border-shadow" src="/images/greys/<%= grey.img %>" alt="porcentaje de canas">
                                             <figcaption>
@@ -167,37 +167,35 @@
 
                 <div id="slide-10" class="question-wrapper">
                     <p class="question-title">¿Qué sutiles reflejos o matices de color te gustaría se vean en tu cabello?</p>
-                    <p class="content">El color del cabello se percibe de manera multidimensional, ya que no es plano.</p>
+                    <!-- p class="content">El color del cabello se percibe de manera multidimensional, ya que no es plano.</p -->
                     <!-- ANSWER reflex -->
                     <input id="reflex" type="hidden" name="reflex" value="">
                     <section class="question light-bg">
-                        <div class="row">
-                            <div id="reflex-tpl" class="col-6">
-                                <article class="tone">
-                                    <input type="button" class="reflex-btn" value=""></input>
-                                    <figure>
-                                        <img src="" alt="imagen de reflejo">
-                                        <figcaption>
-                                            <i class="icon-check"></i>
-                                            <span></span>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                            </div>
+                        <div id="reflex-tpl" class="col-6 col-md-4 col-lg-3">
+                            <article class="tone">
+                                <input type="button" class="reflex-btn answer-btn" value=""></input>
+                                <figure>
+                                    <img class="border-shadow" src="" alt="imagen de reflejo">
+                                    <figcaption>
+                                        <span></span>
+                                    </figcaption>
+                                </figure>
+                            </article>
                         </div>
+                        <div id="reflex-root" class="row"></div>
                     </section>
                 </div>
 
-                <div class="row main-between controls">
-                    <div id="back-controls" class="btn-group">
-                        <button type="back" class="btn btn-icon"><i class="icon-left"></i></button>
-                        <button type="back" class="btn btn-text">volver</button>
-                    </div>
-                    <div class="btn-group">
-                        <button type="forward" class="btn btn-text">continuar</button>
-                        <button type="forward" class="btn btn-icon"><i class="icon-right"></i></button>
-                    </div>
+                <div id="slide-11" class="question-wrapper">
+                    <p class="answer-title"></p>
+                    <p class="content">Cobeauty está calculando Tu Tono Perfecto basándose en tus selecciones...</p>
+                    <figure>
+                        <object type="image/svg+xml" data="images/bot-cobeauty.svg">
+                            <img src="/images/bot-cobeauty.svg" alt="bot cobeauty">
+                        </object>
+                    </figure>
                 </div>
+
             </form>
         </div>
     </main>
