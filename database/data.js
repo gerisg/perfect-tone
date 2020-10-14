@@ -55,16 +55,16 @@ let noWhiteHairColors = ['6.23'];
 let onlyRedColors = ['8.1'];
 
 let families = [
-    {id:'1', text:'Azulado', tones:[1], products:[{ id: '1.A', img:'1a.webp' }]},
-    {id:'2', text:'Naturales', tones:[1,3,4,5,6,7,8,9], products:[{ id: '1', img:'1.webp' }, { id: '3', img:'3.webp' }, { id: '4', img:'4.webp' }, { id: '5', img:'5.webp' }, { id: '6', img:'6.webp' }, { id: '7', img:'7.webp' }, { id: '8', img:'8.webp' }, { id: '9', img:'9.webp' }]},
-    {id:'3', text:'Cenizas', tones:[6,7,8], products:[{ id: '6.11', img:'6-11.webp' }, { id: '7.11', img:'7-11.webp' }, { id: '8.1', img:'8-1.webp' }, { id: '8.13', img:'8-13.webp' }], filterWhiteHair: [['8.13'], ['8.13'], ['8.13'], []]}, // Filter colors by whitehair [0,1,2,3]
-    {id:'4', text:'Dorados y Beiges', tones:[6,7,8], products:[{ id: '6.13', img:'6-13.webp' },{ id: '7.3', img:'7-3.webp' },{ id: '8.13', img:'8-13.webp' }], filterWhiteHair: [[], [], [], ['8.13']]},
-    {id:'5', text:'Marrones y Chocolates', tones:[5,6], products:[{ id: '5.7', img:'5-7.webp' },{ id: '6.23', img:'6-23.webp' },{ id: '6.73', img:'6-73.webp' }]},
-    {id:'6', text:'Marrones y Chocolates', tones:[4,5,6,7], products:[{ id: '4', img:'4.webp' },{ id: '5', img:'5.webp' },{ id: '6.11', img:'6-11.webp' },{ id: '7.11', img:'7-11.webp' }], onlyRedBased: true},
-    {id:'7', text:'Caobas', tones:[5], products:[{ id: '5.5', img:'5-5.webp' }]},
-    {id:'8', text:'Violetas', tones:[5], products:[{ id: '5.20', img:'5-20.webp' }]},
-    {id:'9', text:'Rojos', tones:[6,7], products:[{ id: '6.66', img:'6-66.webp' }, { id: '7.60', img:'7-60.webp' }]},
-    {id:'10', text:'Rojos', tones:[6,7], products:[{ id: '6.66', img:'6-66.webp' }, { id: '7.60', img:'7-60.webp' }], onlyRedBased: true},
+    {id:'1', text:'Azulado', tones:[1], products:[{ id: '1.A', wc: 'lorem-ipsum', img:'1a.webp' }]},
+    {id:'2', text:'Naturales', tones:[1,3,4,5,6,7,8,9], products:[{ id: '1', wc: 'lorem-ipsum', img:'1.webp' }, { id: '3', wc: 'lorem-ipsum', img:'3.webp' }, { id: '4', wc: 'lorem-ipsum', img:'4.webp' }, { id: '5', wc: 'lorem-ipsum', img:'5.webp' }, { id: '6', wc: 'lorem-ipsum', img:'6.webp' }, { id: '7', wc: 'lorem-ipsum', img:'7.webp' }, { id: '8', wc: 'lorem-ipsum', img:'8.webp' }, { id: '9', wc: 'lorem-ipsum', img:'9.webp' }]},
+    {id:'3', text:'Cenizas', tones:[6,7,8], products:[{ id: '6.11', wc: 'lorem-ipsum', img:'6-11.webp' }, { id: '7.11', wc: 'lorem-ipsum', img:'7-11.webp' }, { id: '8.1', wc: 'lorem-ipsum', img:'8-1.webp' }, { id: '8.13', wc: 'lorem-ipsum', img:'8-13.webp' }], filterWhiteHair: [['8.13'], ['8.13'], ['8.13'], []]}, // Filter colors by whitehair [0,1,2,3]
+    {id:'4', text:'Dorados y Beiges', tones:[6,7,8], products:[{ id: '6.31', wc: 'lorem-ipsum', img:'6-31.webp' },{ id: '7.3', wc: 'lorem-ipsum', img:'7-3.webp' },{ id: '8.13', wc: 'lorem-ipsum', img:'8-13.webp' }], filterWhiteHair: [[], [], [], ['8.13']]},
+    {id:'5', text:'Marrones y Chocolates', tones:[5,6], products:[{ id: '5.7', wc: 'lorem-ipsum', img:'5-7.webp' },{ id: '6.23', wc: 'lorem-ipsum', img:'6-23.webp' },{ id: '6.73', wc: 'lorem-ipsum', img:'6-73.webp' }]},
+    {id:'6', text:'Marrones y Chocolates', tones:[4,5,6,7], products:[{ id: '4', wc: 'lorem-ipsum', img:'4.webp' },{ id: '5', wc: 'lorem-ipsum', img:'5.webp' },{ id: '6.11', wc: 'lorem-ipsum', img:'6-11.webp' },{ id: '7.11', wc: 'lorem-ipsum', img:'7-11.webp' }], onlyRedBased: true},
+    {id:'7', text:'Caobas', tones:[5], products:[{ id: '5.5', wc: 'lorem-ipsum', img:'5-5.webp' }]},
+    {id:'8', text:'Violetas', tones:[5], products:[{ id: '5.20', wc: 'lorem-ipsum', img:'5-20.webp' }]},
+    {id:'9', text:'Rojos', tones:[6,7], products:[{ id: '6.66', wc: 'lorem-ipsum', img:'6-66.webp' }, { id: '7.60', wc: 'lorem-ipsum', img:'7-60.webp' }]},
+    {id:'10', text:'Rojos', tones:[6,7], products:[{ id: '6.66', wc: 'lorem-ipsum', img:'6-66.webp' }, { id: '7.60', wc: 'lorem-ipsum', img:'7-60.webp' }], onlyRedBased: true},
 ];
 
 module.exports = { currentTones, naturalTones, desired, greys, families, onlyRedProducts: onlyRedColors, noWhiteHairProducts: noWhiteHairColors };
