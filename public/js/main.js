@@ -223,8 +223,8 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                 controls.parentElement.removeChild(controls);    
                 // Mostrar nombre usuario
                 let name = form.name.value;
-                let lastStep = document.getElementById('slide-11');
-                lastStep.childNodes[1].innerText = name;
+                let lastStep = document.getElementById('slide-11').childNodes[1];
+                lastStep.childNodes[1].childNodes[1].innerText = name;
                 // Show final step
                 showNext(++current);
                 // Mostrar el botón luego de tres segundos
