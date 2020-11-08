@@ -18,6 +18,6 @@ module.exports = {
         };
         transporter.sendMail(mailOptions)
             .then((info) => console.log(info.response))
-            .catch(error => console.log(error));
+            .catch(error => console.error(error));
     }
 }
