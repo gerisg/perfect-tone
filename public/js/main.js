@@ -193,7 +193,9 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                             let reflexNode = reflexTemplate.cloneNode(true);
                             reflexNode.setAttribute('id', 'reflex-' + i);
                             reflexNode.childNodes[1].childNodes[1].value = reflexProd.id;
-                            reflexNode.childNodes[1].childNodes[3].childNodes[1].src = `/images/reflex/${reflexProd.img}`;
+                            reflexNode.childNodes[1].childNodes[3].childNodes[1].children[0].srcset = `/images/reflex/${reflexProd.img}.webp`;
+                            reflexNode.childNodes[1].childNodes[3].childNodes[1].children[1].srcset = `/images/reflex/${reflexProd.img}.jpeg`;
+                            reflexNode.childNodes[1].childNodes[3].childNodes[1].children[2].src = `/images/reflex/${reflexProd.img}.jpeg`;
                             reflexNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].innerHTML = `${reflex.text}`;
                             // En cada click muesto un check y guardo la respuesta
                             reflexNode.childNodes[1].childNodes[1].addEventListener('click', function(e){
