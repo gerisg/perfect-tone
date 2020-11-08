@@ -40,7 +40,6 @@ function getLastStepFromPath() {
 
 // Mostrar el slide del wizard que se recibe por parámetro
 function showSlide(n) {
-    console.log('show slide ' + n);
     let slides = document.getElementsByClassName('question-wrapper');
     let current = n > slides.length || n < 1 ? 1 : n;
     for (let i = 0; i < slides.length; i++) {
@@ -211,7 +210,7 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                         });
                     }
                     showNext(++current);
-                }).catch(error => { console.log(error); });
+                }).catch(error => { console.error(error); });
             } else { 
                 handleFeedback(greyHairAnswer, 'Debe seleccionar el porcentaje de canas para continuar');
             }
@@ -220,9 +219,9 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
             if(reflexAnswer.value) {
                 // Get form
                 const form = document.getElementById('perfectTone');
-                // Eliminar controles
+                // Ocultar controles
                 let controls = document.getElementsByClassName('controls')[0];
-                controls.parentElement.removeChild(controls);    
+                controls.style.visibility = 'hidden';   
                 // Mostrar nombre usuario
                 let name = form.name.value;
                 let lastStep = document.getElementById('slide-11').childNodes[1];
@@ -251,7 +250,7 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                     suggested: form.reflex.dataset.wc
                 })
                 .then(data => { console.log(data); })
-                .catch(error => { console.log(error); });
+                .catch(error => { console.error(error); });
             } else { 
                 handleFeedback(reflexAnswer, 'Debe seleccionar un reflejo para continuar');
             }
