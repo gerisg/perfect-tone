@@ -50,7 +50,9 @@ module.exports = {
         model.create(record);
         
         // Send suggestion by email
-        mailer.sendPerfectTone(record.email, record.suggested);
+        if(record.email) {
+            mailer.sendPerfectTone(record.email, record.suggested);
+        }
 
         res.json({ message: 'success' });
     },
