@@ -177,6 +177,9 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                 .then(data => { 
                     // TODO Check zero results
                     let reflexes = data.reflexes;
+                    if(reflexes.length == 0) {
+                        handleFeedback(reflexAnswer, 'No existen reflejos disponibles para los tonos seleccionados. Enviar un mail a info@cobeauty.store para recibir atención personalizada.');
+                    }
                     
                     // Limpiar reflejos existentes
                     let rootReflex = document.getElementById('reflex-root');
