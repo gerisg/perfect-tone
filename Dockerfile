@@ -1,7 +1,7 @@
 FROM node:12.18-alpine
-WORKDIR /src
-COPY package.json /src
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app
 RUN npm install
-COPY . /src
-CMD node app.js
+COPY . /usr/src/app
+CMD npm run startdev
 EXPOSE 3000
