@@ -206,7 +206,7 @@ forwardBtns.forEach(forward => forward.addEventListener('click', function(event)
                                 Array.prototype.forEach.call(reflexesBtns, rb => rb.classList.remove('selected'));
                                 this.classList.add('selected');
                                 // Guardo la respuesta que se envia en el Form
-                                reflexAnswer.dataset.wc = 'https://cobeauty.store/product/' + reflexProd.wc;
+                                reflexAnswer.dataset.wc = 'https://staging9.cobeauty.store/product/' + reflexProd.wc;
                                 reflexAnswer.value = this.value;
                             });
                             reflexTemplate.nextElementSibling.insertBefore(reflexNode, null);

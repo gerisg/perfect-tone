@@ -60,7 +60,7 @@ let families = [
         text:'Azulado', 
         tones:[1],
         products:[
-            { id: '1.A', wc: 'lorem-ipsum-1A', img:'1a' }
+            { id: '1.A', wc: 'coloracion-permanente-en-crema-color-1a-negro-azulado', img:'1a' }
         ]
     },
     {
@@ -68,14 +68,14 @@ let families = [
         text:'Naturales', 
         tones:[1,3,4,5,6,7,8,9],
         products:[
-            { id: '1', wc: 'lorem-ipsum-1', img:'1' },
-            { id: '3', wc: 'lorem-ipsum-3', img:'3' },
-            { id: '4', wc: 'lorem-ipsum-4', img:'4' },
-            { id: '5', wc: 'lorem-ipsum-5', img:'5' },
-            { id: '6', wc: 'lorem-ipsum-6', img:'6' },
-            { id: '7', wc: 'lorem-ipsum-7', img:'7' },
-            { id: '8', wc: 'lorem-ipsum-8', img:'8' },
-            { id: '9', wc: 'lorem-ipsum-9', img:'9' }
+            { id: '1', wc: 'coloracion-permanente-en-crema-color-1-negro', img:'1' },
+            { id: '3', wc: 'coloracion-permanente-en-crema-color-3-castano-oscuro', img:'3' },
+            { id: '4', wc: 'coloracion-permanente-en-crema-color-4-castano', img:'4' },
+            { id: '5', wc: 'coloracion-permanente-en-crema-color-5-castano-claro', img:'5' },
+            { id: '6', wc: 'coloracion-permanente-en-crema-color-6-rubio-oscuro', img:'6' },
+            { id: '7', wc: 'coloracion-permanente-en-crema-color-7-rubio', img:'7' },
+            { id: '8', wc: 'coloracion-permanente-en-crema-color-8-rubio-claro', img:'8' },
+            { id: '9', wc: 'coloracion-permanente-en-crema-color-9-rubio-muy-claro', img:'9' }
         ]
     },
     {
@@ -83,10 +83,10 @@ let families = [
         text:'Cenizas', 
         tones:[6,7,8],
         products:[
-            { id: '6.11', wc: 'lorem-ipsum-6.11', img:'6-11' },
-            { id: '7.11', wc: 'lorem-ipsum-7.11', img:'7-11' },
-            { id: '8.1', wc: 'lorem-ipsum-8.1', img:'8-1' },
-            { id: '8.13', wc: 'lorem-ipsum-8.13', img:'8-13' }
+            { id: '6.11', wc: 'coloracion-permanente-en-crema-color-6-11-rubio-oscuro-ceniza-profundo', img:'6-11' },
+            { id: '7.11', wc: 'coloracion-permanente-en-crema-color-7-11-rubio-ceniza-profundo', img:'7-11' },
+            { id: '8.1', wc: 'coloracion-permanente-en-crema-color-8-1-rubio-claro-ceniza', img:'8-1' },
+            { id: '8.13', wc: 'coloracion-permanente-en-crema-color-8-13-rubio-claro-ceniza-dorado', img:'8-13' }
         ],
         filterWhiteHair: [
             ['8.13'], // Filter on whitehair 0%
@@ -99,9 +99,9 @@ let families = [
         id:'4',
         text:'Dorados y Beiges', tones:[6,7,8],
         products:[
-            { id: '6.31', wc: 'lorem-ipsum-6.31', img:'6-31' },
-            { id: '7.3', wc: 'lorem-ipsum-7.3', img:'7-3' },
-            { id: '8.13', wc: 'lorem-ipsum-8.13', img:'8-13' }
+            { id: '6.31', wc: 'coloracion-permanente-en-crema-color-6-31-rubio-oscuro-dorado-ceniza', img:'6-31' },
+            { id: '7.3', wc: 'coloracion-permanente-en-crema-color-7-3-rubio-dorado', img:'7-3' },
+            { id: '8.13', wc: 'coloracion-permanente-en-crema-color-8-13-rubio-claro-ceniza-dorado', img:'8-13' }
         ],
         filterWhiteHair: [
             [],
@@ -114,18 +114,18 @@ let families = [
         id:'5',
         text:'Marrones y Chocolates', tones:[5,6],
         products:[
-            { id: '5.7', wc: 'lorem-ipsum-5.7', img:'5-7' },
-            { id: '6.73', wc: 'lorem-ipsum-6.73', img:'6-73' }
+            { id: '5.7', wc: 'coloracion-permanente-en-crema-color-5-7-castano-claro-marron-chocolate', img:'5-7' },
+            { id: '6.73', wc: 'coloracion-permanente-en-crema-color-6-73-rubio-oscuro-chocolate', img:'6-73' }
         ]
     },
     {
         id:'6',
         text:'Marrones y Chocolates', tones:[4,5,6,7],
         products:[
-            { id: '4', wc: 'lorem-ipsum-4', img:'4' },
-            { id: '5', wc: 'lorem-ipsum-5', img:'5' },
-            { id: '6.11', wc: 'lorem-ipsum-6.11', img:'6-11' },
-            { id: '7.11', wc: 'lorem-ipsum-7.11', img:'7-11' }
+            { id: '4', wc: 'coloracion-permanente-en-crema-color-4-castano', img:'4' },
+            { id: '5', wc: 'coloracion-permanente-en-crema-color-5-castano-claro', img:'5' },
+            { id: '6.11', wc: 'coloracion-permanente-en-crema-color-6-11-rubio-oscuro-ceniza-profundo', img:'6-11' },
+            { id: '7.11', wc: 'coloracion-permanente-en-crema-color-7-11-rubio-ceniza-profundo', img:'7-11' }
         ],
         onlyRedBased: true
     },
@@ -134,7 +134,7 @@ let families = [
         text:'Caobas', 
         tones:[5],
         products:[
-            { id: '5.5', wc: 'lorem-ipsum-5.5', img:'5-5' }
+            { id: '5.5', wc: 'coloracion-permanente-en-crema-color-5-5-castano-claro-caoba', img:'5-5' }
         ]
     },
     {
@@ -142,7 +142,7 @@ let families = [
         text:'Violetas', 
         tones:[5],
         products:[
-            { id: '5.20', wc: 'lorem-ipsum-5.20', img:'5-20' }
+            { id: '5.20', wc: 'coloracion-permanente-en-crema-color-5-20-castano-claro-violeta-intenso', img:'5-20' }
         ]
     },
     {
@@ -150,8 +150,8 @@ let families = [
         text:'Rojos', 
         tones:[6,7],
         products:[
-            { id: '6.66', wc: 'lorem-ipsum-6.66', img:'6-66' },
-            { id: '7.60', wc: 'lorem-ipsum-7.60', img:'7-60' }
+            { id: '6.66', wc: 'coloracion-permanente-en-crema-color-6-66-rubio-oscuro-rojo-profundo', img:'6-66' },
+            { id: '7.60', wc: 'coloracion-permanente-en-crema-color-7-60-rubio-rojo-intenso', img:'7-60' }
         ]
     },
     {
@@ -159,8 +159,8 @@ let families = [
         text:'Rojos', 
         tones:[6,7],
         products:[
-            { id: '6.66', wc: 'lorem-ipsum-6.66', img:'6-66' },
-            { id: '7.60', wc: 'lorem-ipsum-7.60', img:'7-60' }
+            { id: '6.66', wc: 'coloracion-permanente-en-crema-color-6-66-rubio-oscuro-rojo-profundo', img:'6-66' },
+            { id: '7.60', wc: 'coloracion-permanente-en-crema-color-7-60-rubio-rojo-intenso', img:'7-60' }
         ],
         onlyRedBased: true
     },
