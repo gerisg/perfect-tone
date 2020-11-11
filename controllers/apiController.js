@@ -27,26 +27,26 @@ function calculateTone(desired, base, greys, colored) {
     switch (desired.value) {
         case 'equal':
             // Suggest same tone
-            suggestedtones.push(parseInt(base.value));
+            suggestedtones.push(parseInt(base.id));
             break;
         case 'light':
             // Suggest one more tone
-            suggestedtones.push(avoidInvalidTone(parseInt(base.value), light));
+            suggestedtones.push(avoidInvalidTone(parseInt(base.id), light));
             // Suggest two more tones only for non colored hairs and currents tones up or equals to 5
-            if(!colored && parseInt(base.value) >= 5)
-                suggestedtones.push(avoidInvalidTone(parseInt(base.value) + 1, light));
+            if(!colored && parseInt(base.id) >= 5)
+                suggestedtones.push(avoidInvalidTone(parseInt(base.id) + 1, light));
             break;
         case 'dark':
             // Suggest one less tone
-            suggestedtones.push(avoidInvalidTone(parseInt(base.value), dark));
+            suggestedtones.push(avoidInvalidTone(parseInt(base.id), dark));
             break;
         default: 
             // Don't know desired tone. Suggest one more tone only non colored hairs, same and one less tone too.
             if(!colored)
-                suggestedtones.push(avoidInvalidTone(parseInt(base.value), light));
+                suggestedtones.push(avoidInvalidTone(parseInt(base.id), light));
             // Suggest 
-            suggestedtones.push(parseInt(base.value));
-            suggestedtones.push(avoidInvalidTone(parseInt(base.value), dark));
+            suggestedtones.push(parseInt(base.id));
+            suggestedtones.push(avoidInvalidTone(parseInt(base.id), dark));
     }
 
     // Filtro las familias que tienen al menos uno de los tonos sugeridos
@@ -112,7 +112,7 @@ module.exports = {
         let base = data.natural;
         let colored = data.current ? true : false;
         if(colored) { 
-            let diffTone = parseInt(data.current.value) - parseInt(data.natural.value);
+            let diffTone = parseInt(data.current.id) - parseInt(data.natural.id);
             if(diffTone != 0) {
                 base = data.current;
             }

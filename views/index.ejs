@@ -89,7 +89,7 @@
                                 <% currentTones[toneFamily].forEach(tone => { %>
                                     <div class="col-5 col-md-4 col-lg-3 slide">
                                         <article class="tone">
-                                            <input type="button" class="current answer-btn" value="<%= tone.value %>"></input>
+                                            <input type="button" class="current answer-btn" value="<%= tone.id %>"></input>
                                             <figure>
                                                 <picture>
                                                     <source srcset="/images/tones/<%= tone.img %>.webp" type="image/webp">
@@ -97,7 +97,7 @@
                                                     <img class="border-shadow" src="/images/tones/<%= tone.img %>.jpeg" alt="tono actual">
                                                 </picture>
                                                 <figcaption>
-                                                    <span><%= tone.text %> (<%= tone.value %>)</span>
+                                                    <span><%= tone.text %> (<%= tone.id %>)</span>
                                                 </figcaption>
                                             </figure>
                                         </article>
@@ -140,7 +140,7 @@
                                 <% naturalTones[toneFamily].forEach(tone => { %>
                                     <div class="col-5 col-md-4 col-lg-3 slide">
                                         <article class="tone">
-                                            <input type="button" class="natural answer-btn" value="<%= tone.value %>"></input>
+                                            <input type="button" class="natural answer-btn" value="<%= tone.id %>"></input>
                                             <figure>
                                                 <picture>
                                                     <source srcset="/images/tones/<%= tone.img %>.webp" type="image/webp">
@@ -148,7 +148,7 @@
                                                     <img class="border-shadow" src="/images/tones/<%= tone.img %>.jpeg" alt="tono natural">
                                                 </picture>
                                                 <figcaption>
-                                                    <span><%= tone.text %> (<%= tone.value %>)</span>
+                                                    <span><%= tone.text %> (<%= tone.id %>)</span>
                                                 </figcaption>
                                             </figure>
                                         </article>
