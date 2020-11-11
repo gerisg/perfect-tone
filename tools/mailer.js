@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
 module.exports = {
     sendPerfectTone: (to, suggested) => {
         let mailOptions = {
-            from: 'info@cobeauty.store',
+            from: 'Cobeauty <info@cobeauty.store>',
             to: to,
             subject: 'Tu Tono Perfecto',
             html: `<html>
