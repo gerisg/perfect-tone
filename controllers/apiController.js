@@ -13,41 +13,57 @@ let populateFromParams = params => {
 let dark = (tone) => --tone;
 let light = (tone) => ++tone;
 
-function avoidInvalidTone(tone, operation) {
+function validateTone(tone, operation) {
+    // Validate tones
+    if(!operation) {
+        if(tone <= 0) return 1;
+        else if (tone >= 10) return 9;
+        return tone;
+    }
+    // Apply operation and validate
     let newTone = operation(tone);
-    if(newTone == 2)
+    if(newTone <= 0) { 
+        return 1; 
+    } else if(newTone == 2) {
         newTone = operation(newTone);
+    } else if(newTone >= 10) {
+        return 9; 
+    }
     return newTone;
 }
 
 function calculateTone(desired, base, greys, colored) {
     let suggestedtones = [];
+    let baseToneId = parseInt(base.id);
 
     // Get suggested tones from current and desired tone
     switch (desired.value) {
         case 'equal':
             // Suggest same tone
-            suggestedtones.push(parseInt(base.id));
+            suggestedtones.push(validateTone(baseToneId));
             break;
         case 'light':
             // Suggest one more tone
-            suggestedtones.push(avoidInvalidTone(parseInt(base.id), light));
+            suggestedtones.push(validateTone(baseToneId, light));
             // Suggest two more tones only for non colored hairs and currents tones up or equals to 5
-            if(!colored && parseInt(base.id) >= 5)
-                suggestedtones.push(avoidInvalidTone(parseInt(base.id) + 1, light));
+            if(!colored && baseToneId >= 5)
+                suggestedtones.push(validateTone(baseToneId + 1, light));
             break;
         case 'dark':
             // Suggest one less tone
-            suggestedtones.push(avoidInvalidTone(parseInt(base.id), dark));
+            suggestedtones.push(validateTone(baseToneId, dark));
             break;
         default: 
             // Don't know desired tone. Suggest one more tone only non colored hairs, same and one less tone too.
             if(!colored)
-                suggestedtones.push(avoidInvalidTone(parseInt(base.id), light));
+                suggestedtones.push(validateTone(baseToneId, light));
             // Suggest 
-            suggestedtones.push(parseInt(base.id));
-            suggestedtones.push(avoidInvalidTone(parseInt(base.id), dark));
+            suggestedtones.push(baseToneId);
+            suggestedtones.push(validateTone(baseToneId, dark));
     }
+
+    // Unique values
+    suggestedtones = Array.from(new Set(suggestedtones));
 
     // Filtro las familias que tienen al menos uno de los tonos sugeridos
     let filteredReflexes = data.families.filter(
