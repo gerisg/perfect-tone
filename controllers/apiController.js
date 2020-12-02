@@ -124,18 +124,21 @@ function calculateTone(desired, base, greys, colored) {
 
 module.exports = {
     reflexes: (req, res) => {
-        let data = populateFromParams(req.body);
-        let base = data.natural;
-        let colored = data.current ? true : false;
+        let populatedParams = populateFromParams(req.body);
+        let base = populatedParams.natural;
+        let colored = populatedParams.current ? true : false;
         if(colored) { 
-            let diffTone = parseInt(data.current.id) - parseInt(data.natural.id);
+            let diffTone = parseInt(populatedParams.current.id) - parseInt(populatedParams.natural.id);
             if(diffTone != 0) {
-                base = data.current;
+                base = populatedParams.current;
             }
         }
-        let reflexes = calculateTone(data.desired, base, data.greys, colored);
-        // Absolute WooCommerce URL
-        reflexes.reflexes.map(reflex => reflex.products.map(product => product.wc = `${process.env.COBEAUTY_HOST}/product/${product.wc}`));
+        let reflexes = calculateTone(populatedParams.desired, base, populatedParams.greys, colored);
+        // Absolute WooCommerce URL [TODO] Find a better place to do it.
+        reflexes.reflexes.forEach(reflex => reflex.products.forEach(product => {
+            if(!product.wc.startsWith('http'))
+                product.wc = `${process.env.COBEAUTY_HOST}/product/${product.wc}`;
+        }));
         res.send(reflexes);
     }
 }
