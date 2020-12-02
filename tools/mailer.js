@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
 module.exports = {
     sendPerfectTone: (to, suggested) => {
         let mailOptions = {
-            from: 'Cobeauty <info@cobeauty.store>',
+            from: 'cobeauty <info@cobeauty.store>',
             to: to,
             subject: 'Tu Tono Perfecto',
             html: `<html>
@@ -23,7 +23,7 @@ module.exports = {
                             <tbody>
                                 <tr>
                                     <td>
-                                        <img width="205" height="35" src="https://cobeauty.store/wp-content/uploads/2020/08/logo-color.png" alt="Cobeauty" style="margin: 10px 0">
+                                        <img width="205" height="35" src="https://cobeauty.store/wp-content/uploads/2020/08/logo-color.png" alt="cobeauty" style="margin: 10px 0">
                                     </td>
                                 </tr>
                                 <tr style="background-color:#632a77">
@@ -40,7 +40,7 @@ module.exports = {
                                 <tr style="background:#f0f0f0">
                                     <td style="font-family:Arial,Sans-serif;font-size:12px;color:#535353;border-bottom:1px solid #fff;border-top:none;border:1px solid #dbdbdb;padding:5px">
                                         <p>Si tenés alguna duda, comentario o sugerencia, envianos un e-mail a <a href="mailto:info@cobeauty.store" style="color:#5092bd;text-decoration:none" target="_blank">info@cobeauty.store</a>.</p>
-                                        <p><b>Equipo Cobeauty</b></p>
+                                        <p><b>Equipo cobeauty</b></p>
                                     </td>
                                 </tr>
                             </tbody>
