@@ -23,7 +23,7 @@ module.exports = {
                             <tbody>
                                 <tr>
                                     <td>
-                                        <img width="205" height="35" src="https://cobeauty.store/wp-content/uploads/2020/08/logo-color.png" alt="cobeauty" style="margin: 10px 0">
+                                        <img width="205" height="35" src="${process.env.COBEAUTY_HOST}/wp-content/uploads/2020/08/logo-color.png" alt="cobeauty" style="margin: 10px 0">
                                     </td>
                                 </tr>
                                 <tr style="background-color:#632a77">

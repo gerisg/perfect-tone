@@ -134,6 +134,8 @@ module.exports = {
             }
         }
         let reflexes = calculateTone(data.desired, base, data.greys, colored);
+        // Absolute WooCommerce URL
+        reflexes.reflexes.map(reflex => reflex.products.map(product => product.wc = `${process.env.COBEAUTY_HOST}/product/${product.wc}`));
         res.send(reflexes);
     }
 }
